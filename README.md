@@ -5,7 +5,6 @@
 
 > **B.E. Computer Science & Engineering Mini Project**  
 > **Author:** Mohd Amir Ali ([techwithamir.com](https://techwithamir.com))  
-> **Guide:** Mrs. Pathan Mz Saida Khanam (Asst. Professor, Dept. of CSE)  
 > **Institution:** Lords Institute of Engineering & Technology (Affiliated to Osmania University, Hyderabad)
 
 ---

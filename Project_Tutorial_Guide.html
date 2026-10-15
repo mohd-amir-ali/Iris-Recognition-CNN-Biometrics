@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCULAR-CNN // Complete Workflow Documentation &amp; Developer Tutorial</title>
+  <link rel="stylesheet" href="static/iris_style.css">
+  <style>
+    .guide-section { margin-bottom: 32px; }
+    .code-block {
+      background-color: var(--ocular-dark);
+      color: #F3F4F6;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      padding: 18px 22px;
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 14px 0;
+      border-left: 4px solid var(--accent-indigo);
+      line-height: 1.6;
+    }
+    .code-block .comment { color: #2DD4BF; }
+    .step-badge {
+      display: inline-block;
+      background-color: var(--accent-indigo);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-lockup">
+        <div class="project-iris-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="4.5" stroke="#14B8A6" stroke-dasharray="2 2"></circle>
+            <circle cx="12" cy="12" r="2" fill="#FBBF24"></circle>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">OCULAR-CNN <span class="slash-accent">●</span> DEVELOPER HANDBOOK</span>
+          <span class="brand-tagline">Workflow, File Map &amp; Customization Guide · Osmania University</span>
+        </div>
+      </div>
+      <nav class="site-nav">
+        <a href="#workflow" class="nav-link active">1. System Workflow</a>
+        <a href="#folder-map" class="nav-link">2. File &amp; Folder Map</a>
+        <a href="#customization" class="nav-link">3. How to Edit</a>
+        <a href="Launch_Iris_Dashboard.html" class="nav-cta">Launch Live App <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-container">
+
+    <div class="eyebrow-bar">
+      <div class="eyebrow-left">
+        <span class="indigo-dot"></span>
+        <span>COMPLETE WORKFLOW DOCUMENTATION · MOHD AMIR ALI (160920733019)</span>
+      </div>
+      <div class="eyebrow-right">
+        B.E. CSE MINI PROJECT · OSMANIA UNIVERSITY, HYDERABAD
+      </div>
+    </div>
+
+    <!-- SECTION 1: END-TO-END WORKFLOW -->
+    <div class="editorial-card guide-section" id="workflow">
+      <span class="eyebrow-label">SECTION 01 // END-TO-END BIOMETRIC PIPELINE</span>
+      <h1 style="font-size: 1.95rem; font-weight: 800; margin-bottom: 12px;">How the Whole Iris Recognition Project Works</h1>
+      <p style="color: var(--slate-muted); margin-bottom: 18px;">
+        The human iris contains over 240 unique trabecular degrees of freedom (crypts, radial furrows, and collarette rings) that remain stable throughout a person's life. Your project identifies individuals across <strong>108 subjects (<code>683</code> Near-Infrared eye scans from the CASIA-IrisV1 dataset)</strong> through a <strong>4-stage computer vision and deep learning pipeline</strong>:
+      </p>
+
+      <div class="code-block">[Raw 850nm NIR Eye Scan (CASIA1 / testSamples)]
+        │  Stage 1: Grayscale Read (cv2.imread) + 5×5 Median Blur (cv2.medianBlur)
+        ▼
+[Hough Circle Transform &amp; Bitwise Masking (getIrisFeatures)]
+        │  Stage 2: Detects circular pupil &amp; iris boundary (cv2.HoughCircles)
+        │           Crops isolated circular iris ROI -&gt; saves to test.png (64×64×3)
+        ▼
+[7-Layer Deep Sequential CNN (model.json + model_weights.h5)]
+        │  Stage 3: Conv2D(32, 3×3) → MaxPool(2×2) → Conv2D(32, 3×3) → MaxPool(2×2)
+        │           → Flatten(6,272) → Dense(256, ReLU) → Softmax(108 Classes)
+        ▼
+[Live Optical Scan Modal Popup &amp; Identity Match]
+        └──► Stage 4: Outputs Predicted Person ID (#001–#108), Confidence %, &amp; Liveness Check</div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 22px;">
+        <div style="padding: 18px; border-radius: 14px; background: var(--bg-primary); border: 1px solid var(--border-hairline);">
+          <span class="step-badge">STAGE 01</span>
+          <h4 style="margin-bottom: 6px;">NIR Acquisition &amp; Denoising</h4>
+          <p style="font-size: 0.88rem; color: var(--slate-muted);">Loads the eye image in grayscale and applies a <code>5×5</code> median filter (<code>cv2.medianBlur(img, 5)</code>) to suppress eyelash and specular reflections.</p>
+        </div>
+        <div style="padding: 18px; border-radius: 14px; background: var(--bg-primary); border: 1px solid var(--border-hairline);">
+          <span class="step-badge">STAGE 02</span>
+          <h4 style="margin-bottom: 6px;">Hough Circle Segmentation</h4>
+          <p style="font-size: 0.88rem; color: var(--slate-muted);">Runs <code>cv2.HoughCircles</code> (<code>param1=63, param2=70</code>) to lock onto the circular iris boundary, masks out the sclera/eyelids via <code>cv2.bitwise_and</code>, and crops <code>test.png</code>.</p>
+        </div>
+        <div style="padding: 18px; border-radius: 14px; background: var(--bg-primary); border: 1px solid var(--border-hairline);">
+          <span class="step-badge">STAGE 03</span>
+          <h4 style="margin-bottom: 6px;">7-Layer CNN Forward Pass</h4>
+          <p style="font-size: 0.88rem; color: var(--slate-muted);">Resizes the segmented iris to <code>64×64×3</code>, normalizes pixel intensities to <code>[0, 1]</code>, and passes the tensor through <code>1,643,788</code> trained parameters.</p>
+        </div>
+        <div style="padding: 18px; border-radius: 14px; background: var(--bg-primary); border: 1px solid var(--border-hairline);">
+          <span class="step-badge">STAGE 04</span>
+          <h4 style="margin-bottom: 6px;">Softmax Match &amp; Spoof Check</h4>
+          <p style="font-size: 0.88rem; color: var(--slate-muted);">Computes <code>argmax(preds) + 1</code> across all 108 subjects, displays the live scan modal popup, and checks corneal reflection liveness to block printed spoof attacks.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: FILE & FOLDER MAP -->
+    <div class="editorial-card guide-section" id="folder-map">
+      <span class="eyebrow-label">SECTION 02 // DIRECTORY BREAKDOWN</span>
+      <h2 style="font-size: 1.65rem; font-weight: 800; margin-bottom: 16px;">Every File Inside Your <code>IrisRecognition</code> Folder</h2>
+
+      <div style="overflow-x: auto;">
+        <table class="editorial-table">
+          <thead>
+            <tr>
+              <th>File / Folder Path</th>
+              <th>Layer (`Frontend` vs. `Backend`)</th>
+              <th>Exact Responsibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono-cell"><strong>index.html</strong> &amp; <strong>Launch_Iris_Dashboard.html</strong></td>
+              <td><span class="status-pill verified">STANDALONE WEB APP</span></td>
+              <td>All-in-one interactive web application used by <strong>GitHub Pages</strong> (<code>index.html</code>) and instant local launch (<code>Launch_Iris_Dashboard.html</code>). Contains the Gaze-Tracking Eye, 7-Layer CNN Visualizer, Live Scan Popup Modal, Base64 CASIA test images, and 60-epoch training curves.</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>Run_Iris_Project.command</strong> &amp; <strong>start.sh</strong></td>
+              <td><span class="status-pill verified">MAC / CLI LAUNCHERS</span></td>
+              <td>Double-clickable macOS Finder launcher and terminal script that start <code>WebApp.py</code> on port <code>5055</code> and open <code>http://127.0.0.1:5055/index</code>.</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>WebApp.py</strong></td>
+              <td><span class="status-pill verified">PYTHON WEB BACKEND</span></td>
+              <td>HTTP web server running on <code>http://127.0.0.1:5055</code>. Serves the dashboard and provides REST endpoints (<code>/api/summary</code> and <code>/api/recognize</code>).</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>iris_cnn_engine.py</strong></td>
+              <td><span class="status-pill verified">CORE CNN &amp; CASIA ENGINE</span></td>
+              <td>Extracts the 60-epoch accuracy/loss arrays from <code>model/history.pckl</code>, parses the 7-layer CNN structure from <code>model/model.json</code>, indexes all 108 subject folders in <code>CASIA1/</code>, and matches uploaded eye scans.</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>Main.py</strong></td>
+              <td><span class="status-pill verified">DESKTOP TKINTER GUI</span></td>
+              <td>Upgraded version of your original desktop Python GUI (`./start.sh --desktop`) with modern styling and a native Tkinter 60-epoch Accuracy &amp; Loss graph.</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>static/iris_style.css</strong></td>
+              <td><span class="status-pill verified">FRONTEND CSS</span></td>
+              <td>Master stylesheet controlling the <strong>Biometric Optical Studio</strong> theme (`#F5F2EB` warm sandstone-alabaster, `#0E131B` ophthalmoscope obsidian, `#D97706` iris amber, and `#0D9488` laser teal).</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>model/</strong></td>
+              <td><span class="status-pill verified">TRAINED CNN ARTIFACTS</span></td>
+              <td>Contains <code>model.json</code> (7-layer architecture), <code>model_weights.h5</code> (trained weights), <code>history.pckl</code> (60-epoch training history), <code>X.txt.npy</code>, and <code>Y.txt.npy</code>.</td>
+            </tr>
+            <tr>
+              <td class="mono-cell"><strong>testSamples/</strong> &amp; <strong>CASIA1/</strong></td>
+              <td><span class="status-pill verified">IRIS DATASET</span></td>
+              <td><code>testSamples/</code> holds quick test images (<code>a.jpg</code> → ID #1, <code>b.jpg</code> → ID #15, <code>c.jpg</code> → ID #14, <code>d.jpg</code> → ID #6); <code>CASIA1/</code> holds all 108 subject directories (`1/` through `108/`).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 3: CUSTOMIZATION CHEAT SHEET -->
+    <div class="editorial-card guide-section" id="customization">
+      <span class="eyebrow-label">SECTION 03 // CUSTOMIZATION TUTORIAL</span>
+      <h2 style="font-size: 1.65rem; font-weight: 800; margin-bottom: 16px;">Where to Make Frontend &amp; Backend Edits</h2>
+
+      <h3 style="font-size: 1.12rem; font-weight: 800; margin-top: 18px; margin-bottom: 8px;">1. Changing Colors or Bento Card Styling</h3>
+      <p style="color: var(--slate-muted); font-size: 0.94rem;">
+        Open <code>static/iris_style.css</code> (lines 3–25) or the top <code>&lt;style&gt;</code> block inside <code>index.html</code> / <code>Launch_Iris_Dashboard.html</code>:
+      </p>
+      <div class="code-block">:root {
+  --bg-primary: #F5F2EB;         <span class="comment">/* Warm Alabaster page background */</span>
+  --ocular-dark: #0E131B;        <span class="comment">/* Dark Ophthalmoscope viewport background */</span>
+  --accent-indigo: #D97706;      <span class="comment">/* Golden Iris Amber primary accent */</span>
+  --accent-cyan: #0D9488;        <span class="comment">/* Biometric Laser Teal secondary accent */</span>
+  --radius-bento: 18px;          <span class="comment">/* Rounded corner radius of Bento cards */</span>
+}</div>
+
+      <h3 style="font-size: 1.12rem; font-weight: 800; margin-top: 22px; margin-bottom: 8px;">2. Adjusting the Gaze-Tracking Eye &amp; Pupil Movement</h3>
+      <p style="color: var(--slate-muted); font-size: 0.94rem;">
+        Inside <code>index.html</code> (in the <code>initGazeTrackingEyeScanner()</code> function), you can tweak the iris radius, vertical eyelid opening, or how far the pupil moves on hover:
+      </p>
+      <div class="code-block">const eyeHalfW = 152;   <span class="comment">// Horizontal width of the stationary eyelid contour</span>
+const eyeOpenH = 92;    <span class="comment">// Vertical eyelid opening height</span>
+const irisR = 66;       <span class="comment">// Radius of the moving iris disc</span>
+targetGazeX = Math.cos(angle) * clampFactor * 36; <span class="comment">// Max horizontal pupil/iris travel</span>
+targetGazeY = Math.sin(angle) * clampFactor * 18; <span class="comment">// Max vertical pupil/iris travel</span></div>
+
+      <h3 style="font-size: 1.12rem; font-weight: 800; margin-top: 22px; margin-bottom: 8px;">3. Editing the Live Scan Popup Modal Speed or Text</h3>
+      <p style="color: var(--slate-muted); font-size: 0.94rem;">
+        Inside <code>index.html</code> (in the <code>openLiveScanModal()</code> function), the scan animation increments <code>progress += 4</code> every <code>48ms</code> (taking ~1.2 seconds total). Change <code>48</code> to a smaller number for a faster scan or a larger number for a slower, more dramatic scan!
+      </p>
+    </div>
+
+    <footer class="site-footer">
+      <div>OCULAR-CNN // WORKFLOW &amp; DEVELOPER DOCUMENTATION</div>
+      <div>MOHD AMIR ALI (160920733019) · OSMANIA UNIVERSITY</div>
+    </footer>
+
+  </main>
+</body>
+</html>

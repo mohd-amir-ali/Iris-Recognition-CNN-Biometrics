@@ -1,0 +1,13 @@
+{
+  "name": "IRIS-CNN // Biometric Iris Recognition",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "postCreateCommand": "pip install -r requirements.txt",
+  "postAttachCommand": "python3 WebApp.py",
+  "forwardPorts": [5055],
+  "portsAttributes": {
+    "5055": {
+      "label": "IRIS-CNN Web Biometric Console",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}

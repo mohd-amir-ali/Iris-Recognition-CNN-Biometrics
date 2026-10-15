@@ -1,0 +1,16 @@
+# Exclude heavy raw numpy training matrix so GitHub push stays fast & under size limits
+model/X.txt.npy
+SCREENS.docx
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# macOS & Windows metadata
+.DS_Store
+Thumbs.db
+CASIA1/**/Thumbs.db
+*.tmp

@@ -93,7 +93,7 @@ def uploadDataset():
     text.insert(END, f"[DATASET LOADED] {filename}\n")
     text.insert(END, "Indexed 108 Subjects (683 Near-Infrared Eye Scans) from CASIA-IrisV1.\n\n")
     if status_label:
-        status_label.config(text="● DATASET LOADED — 108 CASIA subjects indexed.", fg=VERIFIED_GREEN)
+        status_label.config(text="● DATASET LOADED - 108 CASIA subjects indexed.", fg=VERIFIED_GREEN)
 
 
 def loadModel():
@@ -111,7 +111,7 @@ def loadModel():
         )
     text.insert(END, f"\nTotal Trainable Parameters: {arch['total_params']}\n")
     if status_label:
-        status_label.config(text=f"● CNN MODEL LOADED — Accuracy: {hist['final_accuracy_pct']}% (60 Epochs)", fg=ACCENT_INDIGO)
+        status_label.config(text=f"● CNN MODEL LOADED - Accuracy: {hist['final_accuracy_pct']}% (60 Epochs)", fg=ACCENT_INDIGO)
 
 
 def predictChange():
@@ -139,7 +139,7 @@ def predictChange():
 
 def showNativeGraphWindow(acc_data, loss_data):
     win = Toplevel()
-    win.title("CNN Training Performance — 60-Epoch Accuracy & Loss Graph")
+    win.title("CNN Training Performance - 60-Epoch Accuracy & Loss Graph")
     win.geometry("780x500")
     win.configure(bg=BG_MIST)
 
@@ -207,7 +207,7 @@ def graph():
 def main_gui():
     global text, status_label, preview_canvas
     root = tk.Tk()
-    root.title("IRIS-CNN // Biometric Iris Recognition by Convolutional Neural Network")
+    root.title("IRIS RECOGNITION - CNN · Biometric Iris Recognition by Convolutional Neural Network")
     root.geometry("1260x760")
     root.configure(bg=BG_MIST)
 
@@ -216,7 +216,7 @@ def main_gui():
 
     Label(
         header,
-        text="IRIS-CNN // BIOMETRIC IRIS RECOGNITION BY CONVOLUTIONAL NEURAL NETWORK",
+        text="IRIS RECOGNITION - CNN · BIOMETRIC IRIS RECOGNITION BY CONVOLUTIONAL NEURAL NETWORK",
         bg=BG_SURFACE,
         fg=INK_DARK,
         font=("Helvetica", 13, "bold"),
@@ -245,7 +245,7 @@ def main_gui():
 
     status_label = Label(
         root,
-        text="● READY — Load the CNN model or select a test eye scan from testSamples/ to identify the subject.",
+        text="● READY - Load the CNN model or select a test eye scan from testSamples/ to identify the subject.",
         bg=BG_MIST,
         fg=SLATE_MUTED,
         font=("Courier", 11),

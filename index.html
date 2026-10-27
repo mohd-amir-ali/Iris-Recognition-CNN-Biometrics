@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OCULAR-CNN // Biometric Iris Recognition Studio — Osmania University</title>
+  <title>IRIS RECOGNITION - CNN · Biometric Iris Recognition Studio · Osmania University</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230E131B' stroke='%23D97706' stroke-width='3.5'/%3E%3Cpath d='M6 32 C15 16 49 16 58 32 C49 48 15 48 6 32 Z' fill='%23161D2A' stroke='%23FBBF24' stroke-width='2.8' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%23D97706' opacity='0.28'/%3E%3Ccircle cx='32' cy='32' r='13' fill='none' stroke='%2314B8A6' stroke-width='2.4' stroke-dasharray='4 2.5'/%3E%3Ccircle cx='32' cy='32' r='6.2' fill='%2305070B' stroke='%23FBBF24' stroke-width='2'/%3E%3Ccircle cx='29.5' cy='29.5' r='2' fill='%23FFFFFF'/%3E%3C/svg%3E" />
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Biometric Optical Studio Palette — Warm Alabaster Bento + Deep Ocular Obsidian + Iris Amber & Laser Teal */
+  /* Biometric Optical Studio Palette - Warm Alabaster Bento + Deep Ocular Obsidian + Iris Amber & Laser Teal */
   --bg-primary: #F5F2EB;         /* Warm Sandstone-Alabaster Studio Background */
   --bg-surface: #FFFFFF;         /* Crisp Tactile Bento Card Surface */
   --bg-elevated: #ECE7DC;        /* Soft Warm Stone Pill Surface */
@@ -42,6 +43,10 @@
   padding: 0;
 }
 
+html {
+  overflow-y: scroll; /* Prevents horizontal scrollbar shift when switching between tall and short tabs */
+}
+
 html, body {
   background-color: var(--bg-primary);
   color: var(--ink-dark);
@@ -55,6 +60,14 @@ a {
   color: inherit;
   text-decoration: none;
   transition: all 0.22s ease;
+}
+
+.inline-svg-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -71,7 +84,7 @@ a {
 }
 
 .admin-session-inner {
-  max-width: 1340px;
+  max-width: 1320px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -102,7 +115,7 @@ a {
 }
 
 /* ==========================================================================
-   FLOATING PILL HEADER (Distinct from the Blockchain project's flat header)
+   LOCKED FLOATING CAPSULE HEADER (Consistent geometry across all 4 sections)
    ========================================================================== */
 .site-header {
   position: sticky;
@@ -114,9 +127,11 @@ a {
 
 .header-inner {
   max-width: 1320px;
+  width: 100%;
+  min-height: 68px;
   margin: 0 auto;
-  padding: 12px 22px;
-  background-color: rgba(255, 255, 255, 0.90);
+  padding: 10px 22px;
+  background-color: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(14px);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-pill);
@@ -124,8 +139,16 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 16px;
+}
+
+@media (max-width: 1020px) {
+  .header-inner {
+    flex-wrap: wrap;
+    border-radius: 24px;
+    padding: 14px 20px;
+  }
 }
 
 .brand-lockup {
@@ -133,12 +156,13 @@ a {
   align-items: center;
   gap: 12px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .project-iris-icon {
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle at center, #D97706 0%, #0E131B 70%);
+  width: 42px;
+  height: 42px;
+  background: radial-gradient(circle at center, #D97706 0%, #0E131B 72%);
   border: 2px solid #141619;
   border-radius: 50%;
   display: flex;
@@ -146,6 +170,13 @@ a {
   justify-content: center;
   color: #FDE68A;
   flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.25);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.brand-lockup:hover .project-iris-icon {
+  transform: scale(1.06);
+  box-shadow: 0 0 16px rgba(217, 119, 6, 0.5);
 }
 
 .brand-text {
@@ -155,16 +186,19 @@ a {
 
 .brand-name {
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   color: var(--ink-dark);
   line-height: 1.15;
+  white-space: nowrap;
 }
 
 .brand-name .slash-accent {
   color: var(--accent-indigo);
   font-family: var(--font-mono);
+  font-weight: 800;
+  margin: 0 2px;
 }
 
 .brand-tagline {
@@ -175,25 +209,38 @@ a {
   text-transform: uppercase;
   color: var(--slate-muted);
   margin-top: 2px;
+  white-space: nowrap;
 }
 
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 1020px) {
+  .site-nav {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .nav-link {
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--ink-soft);
-  padding: 8px 15px;
+  padding: 8px 14px;
+  height: 38px;
   border-radius: var(--radius-pill);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 7px;
   cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-link:hover {
@@ -207,33 +254,59 @@ a {
 }
 
 .nav-lock-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  padding: 1px 6px;
+  font-weight: 700;
+  padding: 2px 7px;
   border-radius: var(--radius-pill);
   background-color: rgba(217, 119, 6, 0.14);
   color: var(--accent-indigo-hover);
+  line-height: 1;
+}
+
+.nav-link.active .nav-lock-tag {
+  background-color: rgba(251, 191, 36, 0.22);
+  color: #FBBF24;
+}
+
+.nav-lock-tag.unlocked {
+  background-color: rgba(5, 150, 105, 0.15);
+  color: var(--verified-emerald);
+}
+
+.nav-link.active .nav-lock-tag.unlocked {
+  background-color: rgba(16, 185, 129, 0.25);
+  color: #34D399;
 }
 
 .nav-cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 9px 18px;
+  height: 38px;
+  min-width: 168px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--accent-indigo);
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #FFFFFF;
   background: var(--accent-indigo);
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-cta:hover,
-.nav-cta.admin-active {
+.nav-cta.admin-active,
+.nav-cta.login-tab-active {
   background-color: var(--ocular-dark);
   border-color: var(--ocular-dark);
   color: #FBBF24;
@@ -293,7 +366,9 @@ a {
 }
 
 .eyebrow-label {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
@@ -370,7 +445,7 @@ a {
 .btn-primary-editorial {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   padding: 12px 22px;
   background-color: var(--ink-dark);
   color: #FFFFFF;
@@ -380,17 +455,19 @@ a {
   border-radius: var(--radius-pill);
   border: 1px solid var(--ink-dark);
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-primary-editorial:hover {
   background-color: var(--accent-indigo);
   border-color: var(--accent-indigo);
+  transform: translateY(-1px);
 }
 
 .btn-secondary-editorial {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   padding: 12px 20px;
   background-color: var(--bg-primary);
   color: var(--ink-dark);
@@ -400,18 +477,20 @@ a {
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-strong);
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-secondary-editorial:hover {
   border-color: var(--accent-indigo);
   color: var(--accent-indigo-hover);
   background-color: var(--accent-indigo-soft);
+  transform: translateY(-1px);
 }
 
 .btn-danger-editorial {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   padding: 10px 18px;
   border-radius: var(--radius-pill);
   background-color: var(--spoof-bg);
@@ -422,6 +501,7 @@ a {
   text-transform: uppercase;
   border: 1px solid var(--spoof-crimson);
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-danger-editorial:hover {
@@ -477,6 +557,7 @@ a {
   cursor: pointer;
   text-align: center;
   font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .stage-pill.active,
@@ -484,6 +565,22 @@ a {
   background-color: var(--accent-indigo);
   border-color: var(--accent-indigo);
   color: #FFFFFF;
+}
+
+.eye-stage-formula-strip {
+  margin-top: 10px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background-color: rgba(22, 29, 42, 0.9);
+  border: 1px solid rgba(45, 212, 191, 0.24);
+  font-family: var(--font-mono);
+  font-size: 0.71rem;
+  color: #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* Bento Metrics Row */
@@ -532,6 +629,53 @@ a {
   font-size: 0.72rem;
   color: var(--slate-muted);
   margin-top: 4px;
+}
+
+/* Stage Icon Badge & Word-by-Word Scroll Reveal for Overview Code Cards */
+.stage-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.stage-icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--accent-indigo-soft);
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
+  color: var(--accent-indigo-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.scroll-code-snippet {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background-color: var(--ocular-dark);
+  border: 1px solid rgba(217, 119, 6, 0.32);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #E2E8F0;
+}
+
+.scroll-code-snippet .code-word-token {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(7px);
+  filter: blur(2.5px);
+  transition: opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), filter 0.36s ease;
+}
+
+.scroll-code-snippet.revealed .code-word-token {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 /* Interactive Cards & Scanner Grid */
@@ -609,7 +753,9 @@ a {
 }
 
 .status-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
@@ -658,9 +804,39 @@ a {
   color: var(--ink-dark);
 }
 
+.editorial-table tbody tr.layer-row {
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.editorial-table tbody tr.layer-row:hover,
+.editorial-table tbody tr.layer-row.active-layer-row {
+  background-color: var(--accent-indigo-soft);
+}
+
 .mono-cell {
   font-family: var(--font-mono);
   font-size: 0.8rem;
+}
+
+/* Interactive 7-Layer Detail Inspector Box */
+.layer-inspector-panel {
+  margin-top: 16px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background-color: var(--ocular-dark);
+  color: #F3F4F6;
+  border: 1px solid rgba(217, 119, 6, 0.45);
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 780px) {
+  .layer-inspector-panel {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group { margin-bottom: 18px; }
@@ -684,6 +860,12 @@ a {
   color: var(--ink-dark);
 }
 
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-indigo);
+  box-shadow: 0 0 0 3px var(--accent-indigo-soft);
+}
+
 .alert-banner {
   padding: 14px 18px;
   margin-bottom: 20px;
@@ -700,8 +882,50 @@ a {
   color: var(--spoof-crimson);
 }
 
+/* Quality Gate Box in Enroll Operator */
+.quality-gate-card {
+  background-color: var(--ocular-dark);
+  color: #F3F4F6;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(20, 184, 166, 0.35);
+}
+
+.quality-meter-row {
+  margin-bottom: 10px;
+}
+
+.quality-meter-row:last-child {
+  margin-bottom: 0;
+}
+
+.quality-meter-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #D1D5DB;
+  margin-bottom: 4px;
+}
+
+.quality-meter-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.quality-meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #D97706 0%, #14B8A6 100%);
+  transition: width 0.35s ease;
+}
+
 /* ==========================================================================
-   LIVE BIOMETRIC SCAN MODAL POPUP WINDOW
+   LIVE BIOMETRIC SCAN MODAL & 5S ENROLLMENT CONFIRMATION MODAL
    ========================================================================== */
 .scan-modal-backdrop {
   position: fixed;
@@ -793,22 +1017,23 @@ a {
   gap: 12px;
 }
 
-    .tab-section { display: none; }
-    .tab-section.active { display: block; }
-    .prob-bar-track {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background-color: var(--bg-elevated);
-      margin-top: 4px;
-      overflow: hidden;
-    }
-    .prob-bar-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #D97706 0%, #0D9488 100%);
-      transition: width 0.4s ease;
-    }
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+.prob-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background-color: var(--bg-elevated);
+  margin-top: 4px;
+  overflow: hidden;
+}
+.prob-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #D97706 0%, #0D9488 100%);
+  transition: width 0.4s ease;
+}
+
   </style>
 </head>
 <body>
@@ -827,20 +1052,20 @@ a {
     </div>
   </div>
 
-  <!-- Floating Pill Header (Distinct Optical Studio Style) -->
+  <!-- Locked Floating Capsule Header (Consistent across all tabs) -->
   <header class="site-header">
     <div class="header-inner">
       <a onclick="switchTab('overview')" class="brand-lockup">
         <div class="project-iris-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="4.5" stroke="#14B8A6" stroke-dasharray="2 2"></circle>
-            <circle cx="12" cy="12" r="2" fill="#FBBF24"></circle>
+            <circle cx="12" cy="12" r="4.8" stroke="#14B8A6" stroke-dasharray="2.2 1.8"></circle>
+            <circle cx="12" cy="12" r="2.2" fill="#FBBF24" stroke="none"></circle>
           </svg>
         </div>
         <div class="brand-text">
-          <span class="brand-name">OCULAR-CNN <span class="slash-accent">●</span> BIOMETRIC STUDIO</span>
-          <span class="brand-tagline">Osmania University · B.E. CSE Mini Project</span>
+          <span class="brand-name">IRIS RECOGNITION <span class="slash-accent">-</span> CNN</span>
+          <span class="brand-tagline">Osmania University · B.E. CSE Biometrics Studio</span>
         </div>
       </a>
 
@@ -866,12 +1091,15 @@ a {
       <section class="editorial-split">
         <div class="hero-bento-left">
           <div>
-            <span class="eyebrow-label">OPTICAL PATTERN RECOGNITION &amp; NEURAL VISION</span>
+            <span class="eyebrow-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+              OPTICAL PATTERN RECOGNITION &amp; NEURAL VISION
+            </span>
             <h1 class="hero-display-title">
               Biometric Iris Recognition via <span class="serif-italic">Convolutional Neural Networks.</span>
             </h1>
             <p class="editorial-body">
-              The human iris contains over 240 unique trabecular degrees of freedom—crypts, radial furrows, and collarette rings—that remain immutable throughout life. This system isolates the circular iris from Near-Infrared (850nm) eye scans using the <strong>OpenCV Hough Circle Transform</strong> and classifies identities across <strong>108 subjects</strong> with a 7-layer <strong>Deep Sequential CNN</strong>.
+              The human iris contains over 240 unique trabecular degrees of freedom (crypts, radial furrows, and collarette rings) that remain immutable throughout life. This system isolates the circular iris from Near-Infrared (850nm) eye scans using the <strong>OpenCV Hough Circle Transform</strong> and classifies identities across <strong>108 subjects</strong> with a 7-layer <strong>Deep Sequential CNN</strong>.
             </p>
           </div>
 
@@ -881,18 +1109,18 @@ a {
                 <strong>ENGINEERED BY:</strong> MOHD AMIR ALI (160920733019)<br/>
                 <span style="color: var(--slate-muted);">Dept. of CSE · Lords Institute of Engineering &amp; Technology (Affiliated to Osmania University)</span>
               </div>
-              <span class="status-pill verified">● CNN READY</span>
+              <span class="status-pill verified"><span class="pulse-dot" style="width:6px;height:6px;"></span> CNN READY</span>
             </div>
 
             <div id="hero-dynamic-actions" style="display: flex; gap: 12px; flex-wrap: wrap;"></div>
           </div>
         </div>
 
-        <!-- Dark Ophthalmoscope Viewport: Stationary Eye Contour + Cursor-Tracking Pupil & Iris -->
+        <!-- Dark Ophthalmoscope Viewport: Stationary Eye Contour + Full-Window Cursor-Tracking Pupil & Iris -->
         <div class="ocular-viewport-card">
           <div class="ocular-header">
-            <span style="color: #FBBF24; font-weight: 700;">01 // INTERACTIVE GAZE-TRACKING IRIS &amp; HOUGH LASER SCANNER</span>
-            <span id="eye-stage-status" style="color: #2DD4BF;">MOVE CURSOR TO MOVE PUPIL/IRIS · CLICK STAGE BELOW</span>
+            <span style="color: #FBBF24; font-weight: 700;">01 - INTERACTIVE GAZE-TRACKING IRIS &amp; HOUGH LASER SCANNER</span>
+            <span id="eye-stage-status" style="color: #2DD4BF; font-weight: 600;">STAGE 01 - 850nm NIR OCULAR CAPTURE</span>
           </div>
           <canvas id="eye-3d-canvas" width="620" height="305" style="width: 100%; height: 305px; display: block; cursor: crosshair;"></canvas>
           <div class="stage-pills-bar">
@@ -901,28 +1129,32 @@ a {
             <button type="button" class="stage-pill" id="st-btn-2" onclick="setEyeStage(2)">03. ROI Mask &amp; Polar</button>
             <button type="button" class="stage-pill" id="st-btn-3" onclick="setEyeStage(3)">04. CNN Feature Grid</button>
           </div>
+          <div class="eye-stage-formula-strip" id="eye-stage-formula-box">
+            <span id="eye-stage-math" style="color:#FBBF24; font-weight:700;">I_blur(x,y) = MedianFilter_5x5(I_NIR(x,y))</span>
+            <span id="eye-stage-note" style="color:#9CA3AF;">Suppresses 850nm eyelash &amp; corneal glare before Hough segmentation</span>
+          </div>
         </div>
       </section>
 
       <!-- Rounded Bento Metrics Strip -->
       <section class="metrics-strip">
         <div class="metric-item">
-          <div class="metric-label">01 / ENROLLED SUBJECTS</div>
+          <div class="metric-label">01 - ENROLLED SUBJECTS</div>
           <div class="metric-value">108 Classes</div>
           <div class="metric-sub">CASIA-IrisV1 Biometric Database</div>
         </div>
         <div class="metric-item">
-          <div class="metric-label">02 / TRAINING CORPUS</div>
+          <div class="metric-label">02 - TRAINING CORPUS</div>
           <div class="metric-value">683 Scans</div>
           <div class="metric-sub">64×64×3 Hough-Segmented Tensors</div>
         </div>
         <div class="metric-item">
-          <div class="metric-label">03 / CNN ACCURACY</div>
+          <div class="metric-label">03 - CNN ACCURACY</div>
           <div class="metric-value accent">100.0%</div>
           <div class="metric-sub">60 Epochs · Loss: 0.0119 (Adam)</div>
         </div>
         <div class="metric-item">
-          <div class="metric-label">04 / ARCHITECTURE</div>
+          <div class="metric-label">04 - ARCHITECTURE</div>
           <div class="metric-value">7 Layers</div>
           <div class="metric-sub">1,643,788 Trainable Parameters</div>
         </div>
@@ -932,36 +1164,74 @@ a {
       <section class="ocular-viewport-card" style="margin-bottom: 28px;">
         <div class="ocular-header">
           <div>
-            <span style="color: #FBBF24; font-weight: 700;">02 // INTERACTIVE 7-LAYER CONVOLUTIONAL NEURAL NETWORK (CNN) TOPOLOGY</span>
-            <span> — HOVER ANY LAYER TO INSPECT TENSORS · CLICK TO FIRE FORWARD PASS</span>
+            <span style="color: #FBBF24; font-weight: 700;">02 - INTERACTIVE 7-LAYER CONVOLUTIONAL NEURAL NETWORK (CNN) TOPOLOGY</span>
+            <span> · HOVER ANY LAYER TO INSPECT TENSORS · CLICK TO FIRE FORWARD PASS</span>
           </div>
           <span id="cnn-hover-readout" class="status-pill verified" style="background: rgba(20,184,166,0.18); color: #2DD4BF;">64×64×3 INPUT → 108 SOFTMAX IDENTITIES</span>
         </div>
         <canvas id="cnn-network-canvas" width="1240" height="300" style="width: 100%; height: 300px; display: block; cursor: pointer;"></canvas>
       </section>
 
-      <!-- Step-by-Step Algorithmic Breakdown Cards -->
+      <!-- Step-by-Step Algorithmic Breakdown Cards with Custom SVG Icons & Word-by-Word Scroll Reveal -->
       <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px;">
-        <div class="editorial-card" style="margin-bottom: 0;">
-          <span class="eyebrow-label">STAGE 01 // PREPROCESSING</span>
-          <h3 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 8px;">5×5 Median Blur &amp; Hough Circles</h3>
-          <p style="color: var(--slate-muted); font-size: 0.92rem;">
-            Raw grayscale eye scans undergo a <code>5×5</code> median filter (<code>cv2.medianBlur</code>) before <code>cv2.HoughCircles</code> detects the circular iris boundary (<code>param1=63, param2=70</code>) and masks out eyelids and eyelashes.
-          </p>
+        <div class="editorial-card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="stage-card-head">
+              <div class="stage-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5" stroke-dasharray="2.5 2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+              </div>
+              <div>
+                <span class="eyebrow-label" style="margin-bottom: 2px;">STAGE 01 - PREPROCESSING</span>
+                <h3 style="font-size: 1.1rem; font-weight: 800;">5×5 Median Blur &amp; Hough Circles</h3>
+              </div>
+            </div>
+            <p style="color: var(--slate-muted); font-size: 0.91rem;">
+              Raw grayscale eye scans undergo a <code>5×5</code> median filter (<code>cv2.medianBlur</code>) before <code>cv2.HoughCircles</code> detects the circular iris boundary (<code>param1=63, param2=70</code>) and masks out eyelids and eyelashes.
+            </p>
+          </div>
+          <div class="scroll-code-snippet">
+            gray = cv2.medianBlur(cv2.imread(path, 0), 5) ; circles = cv2.HoughCircles(gray, HOUGH_GRADIENT, 1, 20, param1=63, param2=70) ; roi = cv2.bitwise_and(img, mask)
+          </div>
         </div>
-        <div class="editorial-card" style="margin-bottom: 0;">
-          <span class="eyebrow-label">STAGE 02 // FEATURE LEARNING</span>
-          <h3 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 8px;">Dual Conv2D + MaxPooling</h3>
-          <p style="color: var(--slate-muted); font-size: 0.92rem;">
-            Two successive 32-filter <code>3×3</code> Convolution layers with <code>ReLU</code> activation and <code>2×2</code> MaxPooling extract spatial Gabor-like iris crypts, radial furrows, and collarette textures.
-          </p>
+
+        <div class="editorial-card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="stage-card-head">
+              <div class="stage-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4"/></svg>
+              </div>
+              <div>
+                <span class="eyebrow-label" style="margin-bottom: 2px;">STAGE 02 - FEATURE LEARNING</span>
+                <h3 style="font-size: 1.1rem; font-weight: 800;">Dual Conv2D + MaxPooling</h3>
+              </div>
+            </div>
+            <p style="color: var(--slate-muted); font-size: 0.91rem;">
+              Two successive 32-filter <code>3×3</code> Convolution layers with <code>ReLU</code> activation and <code>2×2</code> MaxPooling extract spatial Gabor-like iris crypts, radial furrows, and collarette textures.
+            </p>
+          </div>
+          <div class="scroll-code-snippet">
+            x = MaxPool2D(2,2)(ReLU(Conv2D(32, (3,3))(input_64x64x3))) ; x = MaxPool2D(2,2)(ReLU(Conv2D(32, (3,3))(x))) ; flat = Flatten()(x)
+          </div>
         </div>
-        <div class="editorial-card" style="margin-bottom: 0;">
-          <span class="eyebrow-label">STAGE 03 // IDENTITY MATCHING</span>
-          <h3 style="font-size: 1.12rem; font-weight: 800; margin-bottom: 8px;">256-D Embedding &amp; Softmax</h3>
-          <p style="color: var(--slate-muted); font-size: 0.92rem;">
-            Flattened feature maps pass through a 256-unit dense representation layer into a 108-way Softmax classifier, identifying the exact enrolled person in under 18 milliseconds.
-          </p>
+
+        <div class="editorial-card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="stage-card-head">
+              <div class="stage-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><path d="M9 12l2 2 4-4"/></svg>
+              </div>
+              <div>
+                <span class="eyebrow-label" style="margin-bottom: 2px;">STAGE 03 - IDENTITY MATCHING</span>
+                <h3 style="font-size: 1.1rem; font-weight: 800;">256-D Embedding &amp; Softmax</h3>
+              </div>
+            </div>
+            <p style="color: var(--slate-muted); font-size: 0.91rem;">
+              Flattened feature maps pass through a 256-unit dense representation layer into a 108-way Softmax classifier, identifying the exact enrolled person in under 18 milliseconds.
+            </p>
+          </div>
+          <div class="scroll-code-snippet">
+            emb_256 = ReLU(Dense(256)(flat)) ; probs_108 = Softmax(Dense(108)(emb_256)) ; subject_id = argmax(probs_108) + 1
+          </div>
         </div>
       </section>
     </div>
@@ -971,7 +1241,7 @@ a {
       <div class="eyebrow-bar">
         <div class="eyebrow-left">
           <span class="indigo-dot"></span>
-          <span>02 // AUTHENTICATED ADMIN BIOMETRIC SCANNER &amp; LIVENESS LAB</span>
+          <span>02 - AUTHENTICATED ADMIN BIOMETRIC SCANNER &amp; LIVENESS LAB</span>
         </div>
         <div class="eyebrow-right">
           OSMANIA UNIVERSITY CSE LAB · OPERATOR: <span id="scanner-operator-label">AMIR</span>
@@ -982,7 +1252,10 @@ a {
       <div class="editorial-card" style="border-left: 5px solid var(--accent-indigo); padding: 22px 28px; margin-bottom: 24px;">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
           <div>
-            <span class="eyebrow-label" style="margin-bottom: 4px;">🛡️ RESTRICTED BIOMETRIC ADMIN CONSOLE UNLOCKED</span>
+            <span class="eyebrow-label" style="margin-bottom: 4px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              RESTRICTED BIOMETRIC ADMIN CONSOLE UNLOCKED
+            </span>
             <h2 style="font-size: 1.4rem; font-weight: 800;">
               Welcome, Biometric Administrator <span id="welcome-admin-name" style="color: var(--accent-indigo);">Amir</span>
             </h2>
@@ -991,9 +1264,18 @@ a {
             </p>
           </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button type="button" onclick="openLiveScanModal(currentSampleIdx, false)" class="btn-primary-editorial">🔍 Re-Launch Scan Popup Window</button>
-            <button type="button" onclick="simulateSpoofAttack()" class="btn-danger-editorial">⚡ Simulate Synthetic Iris Spoof Attack</button>
-            <button id="btn-reset-spoof" type="button" onclick="resetSpoofState()" class="btn-secondary-editorial" style="display: none;">🛡️ Reset Optical Sensor</button>
+            <button type="button" onclick="openLiveScanModal(currentSampleIdx, false)" class="btn-primary-editorial">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Re-Launch Scan Popup Window</span>
+            </button>
+            <button type="button" onclick="simulateSpoofAttack()" class="btn-danger-editorial">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Simulate Synthetic Iris Spoof Attack</span>
+            </button>
+            <button id="btn-reset-spoof" type="button" onclick="resetSpoofState()" class="btn-secondary-editorial" style="display: none;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Reset Optical Sensor</span>
+            </button>
           </div>
         </div>
       </div>
@@ -1004,12 +1286,13 @@ a {
       <div class="editorial-card" style="padding: 22px 28px; margin-bottom: 24px;">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
           <div>
-            <span class="eyebrow-label" style="margin-bottom: 2px;">STEP 1 // CLICK ANY SAMPLE TO LAUNCH LIVE SCAN POPUP</span>
+            <span class="eyebrow-label" style="margin-bottom: 2px;">STEP 1 - CLICK ANY SAMPLE TO LAUNCH LIVE SCAN POPUP</span>
             <h3 style="font-size: 1.1rem; font-weight: 800;">CASIA-IrisV1 Reference Test Samples (108-Subject Dataset)</h3>
           </div>
           <div>
             <label class="btn-primary-editorial" style="cursor: pointer;">
-              <span>📂 Upload Custom Eye Image (.jpg / .png)</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Upload Custom Eye Image (.jpg / .png)</span>
               <input type="file" accept="image/*" onchange="handleCustomImageUpload(event)" style="display: none;" />
             </label>
           </div>
@@ -1022,7 +1305,7 @@ a {
         <!-- Stage A: Raw NIR Eye + Hough Circle Reticle -->
         <div class="editorial-card" style="margin-bottom: 0; padding: 22px;">
           <div class="viz-header">
-            <span>STAGE A // RAW NIR EYE + HOUGH CIRCLE</span>
+            <span>STAGE A - RAW NIR EYE + HOUGH CIRCLE</span>
             <span class="status-pill verified" id="stage-a-badge">PUPIL &amp; IRIS LOCKED</span>
           </div>
           <canvas id="scan-input-canvas" width="380" height="270" style="width: 100%; height: 270px; background: #0B0A16; border-radius: 12px; display: block; border: 1px solid var(--border-hairline);"></canvas>
@@ -1034,7 +1317,7 @@ a {
         <!-- Stage B: Isolated Circular Iris ROI Mask & Polar Strip -->
         <div class="editorial-card" style="margin-bottom: 0; padding: 22px;">
           <div class="viz-header">
-            <span>STAGE B // SEGMENTED ROI (test.png)</span>
+            <span>STAGE B - SEGMENTED ROI &amp; POLAR STRIP</span>
             <span class="status-pill verified">64×64×3 TENSOR</span>
           </div>
           <canvas id="scan-roi-canvas" width="320" height="270" style="width: 100%; height: 270px; background: #0B0A16; border-radius: 12px; display: block; border: 1px solid var(--border-hairline);"></canvas>
@@ -1047,7 +1330,7 @@ a {
         <div class="editorial-card" style="margin-bottom: 0; padding: 22px; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div class="viz-header">
-              <span>STAGE C // CNN SOFTMAX PREDICTION</span>
+              <span>STAGE C - CNN SOFTMAX PREDICTION</span>
               <span class="status-pill verified" id="liveness-pill">● NIR LIVENESS VERIFIED</span>
             </div>
 
@@ -1087,7 +1370,7 @@ a {
       <div class="eyebrow-bar">
         <div class="eyebrow-left">
           <span class="indigo-dot"></span>
-          <span>03 // 60-EPOCH CNN TRAINING TELEMETRY &amp; ARCHITECTURE INSPECTOR</span>
+          <span>03 - 60-EPOCH CNN TRAINING TELEMETRY &amp; ARCHITECTURE INSPECTOR</span>
         </div>
         <div class="eyebrow-right">
           OSMANIA UNIVERSITY CSE · model/history.pckl &amp; model/model.json
@@ -1098,22 +1381,23 @@ a {
       <div class="editorial-card">
         <div class="viz-header">
           <div>
-            <span class="eyebrow-label" style="margin-bottom: 2px;">01 // TRAINING CONVERGENCE GRAPH (60 EPOCHS)</span>
+            <span class="eyebrow-label" style="margin-bottom: 2px;">01 - TRAINING CONVERGENCE GRAPH (60 EPOCHS · HOVER TO INSPECT EPOCH)</span>
             <h3 style="font-size: 1.25rem; font-weight: 800;">CNN Accuracy &amp; Categorical Crossentropy Loss Curve</h3>
           </div>
-          <div style="display: flex; gap: 16px; font-family: var(--font-mono); font-size: 0.76rem;">
-            <span style="color: #0D9488; font-weight: 700;">● Training Accuracy (Final: 100.0%)</span>
-            <span style="color: #E11D48; font-weight: 700;">● Crossentropy Loss (Final: 0.0119)</span>
+          <div style="display: flex; gap: 16px; font-family: var(--font-mono); font-size: 0.76rem; align-items: center;">
+            <span id="chart-epoch-readout" class="status-pill verified">EPOCH 60: ACC 100.0% · LOSS 0.0119</span>
+            <span style="color: #0D9488; font-weight: 700;">● Training Accuracy</span>
+            <span style="color: #E11D48; font-weight: 700;">● Crossentropy Loss</span>
           </div>
         </div>
-        <canvas id="training-chart-canvas" width="1200" height="320" style="width: 100%; height: 320px; background: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border-hairline); display: block;"></canvas>
+        <canvas id="training-chart-canvas" width="1200" height="320" style="width: 100%; height: 320px; background: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border-hairline); display: block; cursor: crosshair;"></canvas>
       </div>
 
       <!-- Interactive FAR / FRR Biometric Threshold Tuner -->
       <div class="editorial-card">
         <div class="viz-header">
           <div>
-            <span class="eyebrow-label" style="margin-bottom: 2px;">02 // BIOMETRIC SECURITY CALIBRATION</span>
+            <span class="eyebrow-label" style="margin-bottom: 2px;">02 - BIOMETRIC SECURITY CALIBRATION</span>
             <h3 style="font-size: 1.2rem; font-weight: 800;">Interactive Hamming Distance Threshold &amp; FAR / FRR Simulator</h3>
           </div>
           <span class="status-pill verified" id="threshold-mode-badge">BALANCED HIGH-SECURITY MODE</span>
@@ -1141,10 +1425,10 @@ a {
         </div>
       </div>
 
-      <!-- 7-Layer CNN Architecture Table -->
+      <!-- Interactive 7-Layer CNN Architecture Inspector & Table -->
       <div class="editorial-card">
-        <span class="eyebrow-label">03 // MODEL SUMMARY (model/model.json &amp; model_weights.h5)</span>
-        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 16px;">Sequential Deep Iris CNN Layer Breakdown</h3>
+        <span class="eyebrow-label">03 - INTERACTIVE 7-LAYER CNN ARCHITECTURE INSPECTOR (CLICK ANY LAYER ROW)</span>
+        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 14px;">Sequential Deep Iris CNN Layer Breakdown</h3>
         <div style="overflow-x: auto;">
           <table class="editorial-table">
             <thead>
@@ -1160,6 +1444,28 @@ a {
             <tbody id="cnn-layers-tbody"></tbody>
           </table>
         </div>
+
+        <!-- Live Interactive Layer Detail Card -->
+        <div class="layer-inspector-panel" id="layer-inspector-box">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #2DD4BF; letter-spacing: 0.1em; margin-bottom: 4px;" id="insp-layer-kicker">
+              SELECTED LAYER TELEMETRY · LAYER #01
+            </div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #FBBF24; margin-bottom: 6px;" id="insp-layer-title">
+              conv2d_1 · 2D Spatial Gabor-Like Feature Extractor
+            </div>
+            <p style="font-size: 0.86rem; color: #D1D5DB; line-height: 1.55; margin-bottom: 10px;" id="insp-layer-desc">
+              Applies 32 learnable 3×3 spatial convolution kernels across the normalized 64×64×3 segmented iris ROI to capture primary trabecular crypt edges and collarette ring boundaries.
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.74rem; color: #9CA3AF;" id="insp-layer-math">
+              Parameter Math: (3 × 3 × 3 + 1) × 32 filters = 896 trainable weights
+            </div>
+          </div>
+          <div style="background: #161E2E; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; text-align: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.68rem; color: #9CA3AF; margin-bottom: 8px;">LIVE FEATURE MAP ACTIVATION PREVIEW</div>
+            <canvas id="layer-activation-canvas" width="220" height="84" style="width: 100%; height: 84px; display: block; border-radius: 8px; background: #090D14;"></canvas>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1168,16 +1474,19 @@ a {
       <div class="eyebrow-bar">
         <div class="eyebrow-left">
           <span class="indigo-dot"></span>
-          <span>01 // ROLE-GATED BIOMETRIC ADMINISTRATOR LOGIN</span>
+          <span>01 - ROLE-GATED BIOMETRIC ADMINISTRATOR LOGIN</span>
         </div>
         <div class="eyebrow-right">
           LEVEL-5 CLEARANCE REQUIRED FOR SCANNER &amp; ANALYTICS
         </div>
       </div>
 
-      <div style="max-width: 540px; margin: 24px auto;">
+      <div style="max-width: 560px; margin: 24px auto;">
         <div class="editorial-card">
-          <span class="eyebrow-label">BIOMETRIC ACCESS CONTROL</span>
+          <span class="eyebrow-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            BIOMETRIC ACCESS CONTROL
+          </span>
           <h1 style="font-size: 1.65rem; font-weight: 800; margin-bottom: 6px;">Admin &amp; Verification Login</h1>
           <p style="font-family: var(--font-serif); font-style: italic; color: var(--slate-muted); margin-bottom: 20px;">
             Authenticate to unlock the 3-Stage Iris Biometric Scanner, Live Scan Popup Window, Spoof-Attack Lab, and 60-Epoch CNN Analytics.
@@ -1192,65 +1501,117 @@ a {
             <input id="login-pass" class="form-input" type="password" value="amir123" />
           </div>
           <div style="background-color: var(--bg-elevated); border-radius: 12px; padding: 12px 14px; margin-bottom: 20px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--slate-muted);">
-            <strong>🔓 ADMIN MODULES UNLOCKED UPON LOGIN:</strong><br/>
+            <strong style="display:inline-flex;align-items:center;gap:6px;color:var(--ink-dark);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+              ADMIN MODULES UNLOCKED UPON LOGIN:
+            </strong><br/>
             • Live Optical Iris Scan Popup Modal + 3-Stage CASIA Scanner<br/>
             • NIR Specular Liveness &amp; Synthetic Spoof-Attack Simulator<br/>
-            • 60-Epoch CNN Loss/Accuracy Graph &amp; FAR/FRR Threshold Tuner
+            • 60-Epoch CNN Loss/Accuracy Graph &amp; Interactive 7-Layer Inspector
           </div>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button type="button" onclick="handleLogin()" class="btn-primary-editorial">🔓 Authenticate &amp; Unlock Scanner ↗</button>
-            <button type="button" onclick="switchTab('signup')" class="btn-secondary-editorial">Enroll New Operator ↗</button>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" onclick="handleLogin()" class="btn-primary-editorial">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+              <span>Authenticate &amp; Unlock Scanner ↗</span>
+            </button>
+            <button type="button" onclick="quickDemoUnlock()" class="btn-secondary-editorial" style="border-color: var(--accent-indigo); color: var(--accent-indigo-hover);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>1-Click Demo Admin Unlock</span>
+            </button>
+            <button type="button" onclick="switchTab('signup')" class="btn-secondary-editorial">
+              <span>Enroll New Operator ↗</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ================= TAB 5: SIGNUP ================= -->
+    <!-- ================= TAB 5: SIGNUP / ENROLL OPERATOR ================= -->
     <div id="tab-signup" class="tab-section">
       <div class="eyebrow-bar">
         <div class="eyebrow-left">
           <span class="indigo-dot"></span>
-          <span>02 // BIOMETRIC OPERATOR ENROLLMENT</span>
+          <span>04 - BIOMETRIC OPERATOR ENROLLMENT &amp; QUALITY GATE</span>
         </div>
         <div class="eyebrow-right">
           OSMANIA UNIVERSITY CSE BIOMETRICS LAB
         </div>
       </div>
 
-      <div style="max-width: 580px; margin: 24px auto;">
+      <div style="max-width: 640px; margin: 24px auto;">
         <div class="editorial-card">
-          <span class="eyebrow-label">ACCESS REGISTRY</span>
+          <span class="eyebrow-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            ACCESS REGISTRY &amp; IRIS QUALITY GATE
+          </span>
           <h1 style="font-size: 1.65rem; font-weight: 800; margin-bottom: 6px;">Enroll Biometric Operator</h1>
           <p style="font-family: var(--font-serif); font-style: italic; color: var(--slate-muted); margin-bottom: 20px;">
-            Provision a new operator account with access to the CNN recognition console.
+            Provision a new operator account with verified iris quality telemetry and Level-4 access to the CNN recognition console.
           </p>
           <div id="signup-alert"></div>
           <div class="form-group">
             <label class="form-label">Operator Username</label>
-            <input id="su-user" class="form-input" type="text" placeholder="e.g. amir_biometrics" />
+            <input id="su-user" class="form-input" type="text" placeholder="e.g. amir_biometrics" oninput="updateEnrollQualityGate()" />
           </div>
           <div class="form-group">
             <label class="form-label">Passkey / Password</label>
-            <input id="su-pass" class="form-input" type="password" placeholder="Create operator password" />
+            <input id="su-pass" class="form-input" type="password" placeholder="Create operator password" oninput="updateEnrollQualityGate()" />
           </div>
           <div class="form-group">
             <label class="form-label">Official Email</label>
-            <input id="su-email" class="form-input" type="email" placeholder="e.g. amir@techwithamir.com" />
+            <input id="su-email" class="form-input" type="email" placeholder="e.g. amir@techwithamir.com" oninput="updateEnrollQualityGate()" />
           </div>
           <div class="form-group">
             <label class="form-label">Department / Institution</label>
-            <input id="su-dept" class="form-input" type="text" placeholder="e.g. CSE Dept, Lords Institute (Osmania University)" />
+            <input id="su-dept" class="form-input" type="text" placeholder="e.g. CSE Dept, Lords Institute (Osmania University)" oninput="updateEnrollQualityGate()" />
           </div>
+
+          <!-- Live Biometric Iris Quality Gate Telemetry -->
+          <div class="quality-gate-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: #FBBF24; letter-spacing: 0.08em;">
+                LIVE ENROLLMENT QUALITY GATE (850nm NIR TELEMETRY)
+              </span>
+              <span class="status-pill verified" id="qg-status-pill" style="background: rgba(20,184,166,0.2); color: #2DD4BF;">ISO/IEC 19794-6 PASS</span>
+            </div>
+            <div class="quality-meter-row">
+              <div class="quality-meter-top">
+                <span>Corneal Specular Liveness &amp; Focus Sharpness</span>
+                <strong id="qg-val-1" style="color: #FBBF24;">99.4%</strong>
+              </div>
+              <div class="quality-meter-track"><div id="qg-bar-1" class="quality-meter-fill" style="width: 99.4%;"></div></div>
+            </div>
+            <div class="quality-meter-row">
+              <div class="quality-meter-top">
+                <span>Unoccluded Iris Trabecular Area (Eyelid Clearance)</span>
+                <strong id="qg-val-2" style="color: #2DD4BF;">96.2%</strong>
+              </div>
+              <div class="quality-meter-track"><div id="qg-bar-2" class="quality-meter-fill" style="width: 96.2%;"></div></div>
+            </div>
+            <div class="quality-meter-row">
+              <div class="quality-meter-top">
+                <span>256-D CNN Embedding Entropy &amp; Uniqueness</span>
+                <strong id="qg-val-3" style="color: #34D399;">244.8 bits / 256</strong>
+              </div>
+              <div class="quality-meter-track"><div id="qg-bar-3" class="quality-meter-fill" style="width: 95.6%;"></div></div>
+            </div>
+          </div>
+
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button type="button" onclick="handleSignup()" class="btn-primary-editorial">Enroll Operator ↗</button>
-            <button type="button" onclick="switchTab('login')" class="btn-secondary-editorial">Proceed to Login ↗</button>
+            <button type="button" onclick="handleSignup()" class="btn-primary-editorial">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+              <span>Enroll Operator &amp; Generate 256-D Hash ↗</span>
+            </button>
+            <button type="button" onclick="switchTab('login')" class="btn-secondary-editorial">
+              <span>Proceed to Login ↗</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <footer class="site-footer">
-      <div>IRIS RECOGNITION BY CONVOLUTIONAL NEURAL NETWORK (CNN) · OSMANIA UNIVERSITY ('23)</div>
+      <div>IRIS RECOGNITION - CNN · BIOMETRIC RECOGNITION STUDIO · OSMANIA UNIVERSITY ('23)</div>
       <div>MOHD AMIR ALI (160920733019) · <a href="https://techwithamir.com" target="_blank" style="text-decoration: underline;">TECHWITHAMIR.COM ↗</a></div>
     </footer>
 
@@ -1300,7 +1661,7 @@ a {
                 </div>
               </div>
 
-              <!-- Extracted Circular ROI Mini-Preview (Matches 'Iris features extracted from image' popup) -->
+              <!-- Extracted Circular ROI Mini-Preview -->
               <div style="background: #161E2E; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
                 <canvas id="modal-roi-mini" width="76" height="76" style="width: 76px; height: 76px; border-radius: 50%; border: 2px solid #14B8A6; background: #000; flex-shrink: 0;"></canvas>
                 <div style="font-family: var(--font-mono); font-size: 0.72rem;">
@@ -1313,10 +1674,56 @@ a {
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button type="button" onclick="closeScanModal()" class="btn-primary-editorial" style="width: 100%; justify-content: center; background: #D97706; border-color: #D97706;">
-                <span>✓ View Full 3-Stage Pipeline Breakdown</span>
+                <span>View Full 3-Stage Pipeline Breakdown</span>
               </button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 5-SECOND AUTO-CLOSING OPERATOR ENROLLMENT MODAL ================= -->
+  <div id="enroll-modal-backdrop" class="scan-modal-backdrop" onclick="if(event.target===this) closeEnrollModal()">
+    <div class="scan-modal-window" style="max-width: 560px;">
+      <div class="scan-modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="pulse-dot"></span>
+          <span style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; color: #34D399;">
+            BIOMETRIC OPERATOR ENROLLED &amp; HASH LOCKED
+          </span>
+        </div>
+        <button type="button" onclick="closeEnrollModal()" style="background: rgba(255,255,255,0.1); border: none; color: #FFF; padding: 5px 12px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.74rem; cursor: pointer;">
+          ✕ CLOSE
+        </button>
+      </div>
+      <div class="scan-modal-body">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+          <div class="project-iris-icon" style="width: 50px; height: 50px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="4.8" stroke="#14B8A6" stroke-dasharray="2.2 1.8"></circle>
+              <circle cx="12" cy="12" r="2.2" fill="#FBBF24" stroke="none"></circle>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #2DD4BF;">LEVEL-5 BIOMETRIC REGISTRY CONFIRMED</div>
+            <div id="enroll-modal-user" style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF;">Operator Enrolled</div>
+            <div id="enroll-modal-dept" style="font-family: var(--font-mono); font-size: 0.74rem; color: #9CA3AF;">CSE Biometrics Lab</div>
+          </div>
+        </div>
+        <div style="background: #161E2E; border: 1px solid rgba(251,191,36,0.35); border-radius: 12px; padding: 14px; font-family: var(--font-mono); font-size: 0.73rem; margin-bottom: 14px;">
+          <div style="color: #FBBF24; font-weight: 700; margin-bottom: 4px;">GENERATED 256-D CNN BIOMETRIC SIGNATURE HASH:</div>
+          <div id="enroll-modal-hash" style="color: #E2E8F0; word-break: break-all;">0x8F4A...9C21</div>
+        </div>
+        <div class="scan-progress-track">
+          <div id="enroll-modal-bar" class="scan-progress-fill" style="width: 100%; transition: width 0.1s linear;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-family: var(--font-mono); font-size: 0.72rem; color: #9CA3AF;">
+          <span id="enroll-modal-countdown">Auto-closing &amp; unlocking scanner in 5.0s...</span>
+          <button type="button" onclick="closeEnrollModal()" class="btn-primary-editorial" style="padding: 8px 16px; background: #D97706; border-color: #D97706; font-size: 0.76rem;">
+            Open Scanner Now ↗
+          </button>
         </div>
       </div>
     </div>
@@ -1333,11 +1740,37 @@ a {
     let currentEyeStage = 0;
     let spoofActive = false;
     let modalAnimTimer = null;
+    let enrollModalTimer = null;
+    let selectedLayerIdx = 0;
+
+    // Inline Vector SVG Icon Factory (Replaces all emojis cleanly)
+    function svgIcon(name, size = 13) {
+      const attrs = `width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" class="inline-svg-icon"`;
+      switch (name) {
+        case "lock":
+          return `<svg ${attrs}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`;
+        case "unlock":
+          return `<svg ${attrs}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>`;
+        case "eye":
+          return `<svg ${attrs}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3.5"></circle></svg>`;
+        case "chart":
+          return `<svg ${attrs}><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`;
+        case "shield":
+          return `<svg ${attrs}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>`;
+        default:
+          return `<svg ${attrs}><circle cx="12" cy="12" r="9"></circle></svg>`;
+      }
+    }
 
     function renderNavigation() {
       const nav = document.getElementById("dynamic-navbar");
       const topBar = document.getElementById("admin-top-bar");
       const heroActions = document.getElementById("hero-dynamic-actions");
+
+      // Keep label text & structure identical in width between locked & unlocked states so capsule header never shifts!
+      const lockBadge = isAdminLoggedIn
+        ? `<span class="nav-lock-tag unlocked">${svgIcon('unlock', 10)} READY</span>`
+        : `<span class="nav-lock-tag">${svgIcon('lock', 10)} ADMIN</span>`;
 
       if (isAdminLoggedIn) {
         topBar.style.display = "block";
@@ -1347,39 +1780,46 @@ a {
 
         nav.innerHTML = `
           <a onclick="switchTab('overview')" class="nav-link ${currentTab === 'overview' ? 'active' : ''}">Overview</a>
-          <a onclick="switchTab('scanner')" class="nav-link ${currentTab === 'scanner' ? 'active' : ''}">👁️ Biometric Scanner &amp; Spoof Lab</a>
-          <a onclick="switchTab('analytics')" class="nav-link ${currentTab === 'analytics' ? 'active' : ''}">📈 60-Epoch CNN Analytics</a>
+          <a onclick="switchTab('scanner')" class="nav-link ${currentTab === 'scanner' ? 'active' : ''}">Biometric Scanner ${lockBadge}</a>
+          <a onclick="switchTab('analytics')" class="nav-link ${currentTab === 'analytics' ? 'active' : ''}">CNN Analytics ${lockBadge}</a>
           <a onclick="switchTab('signup')" class="nav-link ${currentTab === 'signup' ? 'active' : ''}">Enroll Operator</a>
-          <a onclick="handleLogout()" class="nav-cta admin-active">● Admin: ${currentOperator} (Logout) <span>↗</span></a>
+          <a onclick="handleLogout()" class="nav-cta admin-active">${svgIcon('unlock', 13)} <span>ADMIN: ${currentOperator.toUpperCase()}</span> <span>↗</span></a>
         `;
         if (heroActions) {
           heroActions.innerHTML = `
-            <button type="button" onclick="switchTab('scanner')" class="btn-primary-editorial"><span>👁️ Open Biometric Iris Scanner</span><span>↗</span></button>
-            <button type="button" onclick="switchTab('analytics')" class="btn-secondary-editorial"><span>📈 Inspect 60-Epoch CNN Graph</span><span>↗</span></button>
+            <button type="button" onclick="switchTab('scanner')" class="btn-primary-editorial">${svgIcon('eye', 15)} <span>Open Biometric Iris Scanner</span><span>↗</span></button>
+            <button type="button" onclick="switchTab('analytics')" class="btn-secondary-editorial">${svgIcon('chart', 15)} <span>Inspect 60-Epoch CNN Graph</span><span>↗</span></button>
           `;
         }
       } else {
         topBar.style.display = "none";
         nav.innerHTML = `
           <a onclick="switchTab('overview')" class="nav-link ${currentTab === 'overview' ? 'active' : ''}">Overview</a>
-          <a onclick="requireLogin('scanner')" class="nav-link">Biometric Scanner <span class="nav-lock-tag">🔒 ADMIN</span></a>
-          <a onclick="requireLogin('analytics')" class="nav-link">CNN Analytics <span class="nav-lock-tag">🔒 ADMIN</span></a>
+          <a onclick="requireLogin('scanner')" class="nav-link ${currentTab === 'scanner' ? 'active' : ''}">Biometric Scanner ${lockBadge}</a>
+          <a onclick="requireLogin('analytics')" class="nav-link ${currentTab === 'analytics' ? 'active' : ''}">CNN Analytics ${lockBadge}</a>
           <a onclick="switchTab('signup')" class="nav-link ${currentTab === 'signup' ? 'active' : ''}">Enroll Operator</a>
-          <a onclick="switchTab('login')" class="nav-cta">🔒 Admin Login <span>↗</span></a>
+          <a onclick="switchTab('login')" class="nav-cta ${currentTab === 'login' ? 'login-tab-active' : ''}">${svgIcon('lock', 13)} <span>ADMIN LOGIN</span> <span>↗</span></a>
         `;
         if (heroActions) {
           heroActions.innerHTML = `
-            <button type="button" onclick="switchTab('login')" class="btn-primary-editorial"><span>🔒 Login as Admin to Scan Iris Samples</span><span>↗</span></button>
-            <button type="button" onclick="setEyeStage((currentEyeStage + 1) % 4)" class="btn-secondary-editorial"><span>Step Through Eye Algorithm</span><span>↗</span></button>
+            <button type="button" onclick="switchTab('login')" class="btn-primary-editorial">${svgIcon('lock', 15)} <span>Login as Admin to Scan Iris Samples</span><span>↗</span></button>
+            <button type="button" onclick="setEyeStage((currentEyeStage + 1) % 4)" class="btn-secondary-editorial">${svgIcon('eye', 15)} <span>Step Through Eye Algorithm</span><span>↗</span></button>
           `;
         }
       }
     }
 
     function requireLogin(targetTab) {
+      window.pendingTargetTab = targetTab || "scanner";
       document.getElementById("login-alert").innerHTML =
-        `<div class="alert-banner">🔒 <strong>Biometric Administrator Clearance Required:</strong> Please authenticate below (Demo: <code>Amir</code> / <code>amir123</code>) to unlock the live Iris Recognition Scanner and CNN Analytics.</div>`;
+        `<div class="alert-banner">${svgIcon('lock', 14)} <strong>Biometric Administrator Clearance Required:</strong> Authenticate below (Demo: <code>Amir</code> / <code>amir123</code>) or click <strong>1-Click Demo Admin Unlock</strong> to access the live Iris Recognition Scanner and CNN Analytics.</div>`;
       switchTab("login");
+    }
+
+    function quickDemoUnlock() {
+      document.getElementById("login-user").value = "Amir";
+      document.getElementById("login-pass").value = "amir123";
+      handleLogin();
     }
 
     function switchTab(tabId) {
@@ -1396,7 +1836,8 @@ a {
       if (tabId === "scanner") {
         selectPreloadedSample(currentSampleIdx, false);
       } else if (tabId === "analytics") {
-        drawTrainingCurveChart();
+        animateTrainingCurveChart();
+        selectCNNLayerInspector(selectedLayerIdx);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -1409,7 +1850,9 @@ a {
         isAdminLoggedIn = true;
         currentOperator = found ? found.username : "Amir";
         document.getElementById("login-alert").innerHTML = "";
-        switchTab("scanner");
+        const nextTab = window.pendingTargetTab || "scanner";
+        window.pendingTargetTab = null;
+        switchTab(nextTab);
       } else {
         document.getElementById("login-alert").innerHTML =
           `<div class="alert-banner danger">Invalid credentials. Use default Admin account: <strong>Amir</strong> / <strong>amir123</strong></div>`;
@@ -1422,6 +1865,24 @@ a {
       switchTab("overview");
     }
 
+    function updateEnrollQualityGate() {
+      const u = (document.getElementById("su-user").value || "amir").trim();
+      const d = (document.getElementById("su-dept").value || "CSE").trim();
+      let seed = 0;
+      for (let i = 0; i < u.length + d.length; i++) {
+        seed += (u + d).charCodeAt(i) * (i + 1);
+      }
+      const v1 = (98.6 + (seed % 13) * 0.1).toFixed(1);
+      const v2 = (94.8 + (seed % 42) * 0.1).toFixed(1);
+      const v3 = (242.0 + (seed % 120) * 0.1).toFixed(1);
+      document.getElementById("qg-val-1").innerText = v1 + "%";
+      document.getElementById("qg-bar-1").style.width = v1 + "%";
+      document.getElementById("qg-val-2").innerText = v2 + "%";
+      document.getElementById("qg-bar-2").style.width = v2 + "%";
+      document.getElementById("qg-val-3").innerText = v3 + " bits / 256";
+      document.getElementById("qg-bar-3").style.width = ((parseFloat(v3) / 256) * 100).toFixed(1) + "%";
+    }
+
     function handleSignup() {
       const u = document.getElementById("su-user").value.trim();
       const p = document.getElementById("su-pass").value;
@@ -1429,31 +1890,95 @@ a {
       const dp = document.getElementById("su-dept").value.trim() || "CSE Biometrics Lab, Osmania University";
       if (!u || !p) {
         document.getElementById("signup-alert").innerHTML =
-          `<div class="alert-banner danger">Please enter both a username and password.</div>`;
+          `<div class="alert-banner danger">Please enter both an Operator Username and Password to complete enrollment.</div>`;
         return;
       }
       allOperators.push({ username: u, password: p, email: em, department: dp });
-      document.getElementById("signup-alert").innerHTML =
-        `<div class="alert-banner">● Operator <strong>"${u}"</strong> enrolled with Level-4 Biometric Clearance. You can now log in!</div>`;
+      isAdminLoggedIn = true;
+      currentOperator = u;
+      renderNavigation();
+
+      // Generate deterministic 256-bit hex signature preview
+      let hex = "0x";
+      for (let i = 0; i < 48; i++) {
+        const c = (u.charCodeAt(i % u.length) * (i + 7) + dp.charCodeAt(i % dp.length)) % 16;
+        hex += c.toString(16).toUpperCase();
+      }
+      document.getElementById("enroll-modal-user").innerText = `Operator: ${u}`;
+      document.getElementById("enroll-modal-dept").innerText = `${dp} · ${em}`;
+      document.getElementById("enroll-modal-hash").innerText = hex;
+
+      const backdrop = document.getElementById("enroll-modal-backdrop");
+      backdrop.classList.add("open");
+      const bar = document.getElementById("enroll-modal-bar");
+      const cd = document.getElementById("enroll-modal-countdown");
+      let remainingMs = 5000;
+      bar.style.width = "100%";
+      if (enrollModalTimer) clearInterval(enrollModalTimer);
+      enrollModalTimer = setInterval(() => {
+        remainingMs -= 100;
+        const pct = Math.max(0, (remainingMs / 5000) * 100);
+        bar.style.width = pct + "%";
+        cd.innerText = `Auto-closing & unlocking scanner in ${(Math.max(0, remainingMs) / 1000).toFixed(1)}s...`;
+        if (remainingMs <= 0) {
+          closeEnrollModal();
+        }
+      }, 100);
+    }
+
+    function closeEnrollModal() {
+      if (enrollModalTimer) {
+        clearInterval(enrollModalTimer);
+        enrollModalTimer = null;
+      }
+      document.getElementById("enroll-modal-backdrop").classList.remove("open");
+      switchTab("scanner");
     }
 
     // =========================================================================
-    // 1. ANATOMICALLY PROPORTIONED EYE WITH GAZE-TRACKING PUPIL & IRIS
-    //    (Outer Eye Contour Stays Fixed; Pupil & Iris Track Cursor Hover!)
+    // 1. ANATOMICALLY PROPORTIONED EYE WITH FULL-WINDOW GAZE TRACKING
+    //    + OCCASIONAL NATURAL BLINK & PUPIL LIGHT-REFLEX MICRO-ANIMATION
     // =========================================================================
+    let stageTransitionPulse = 0;
+
     function setEyeStage(st) {
       currentEyeStage = st;
+      stageTransitionPulse = 1.0;
       for (let i = 0; i < 4; i++) {
         const b = document.getElementById("st-btn-" + i);
         if (b) b.className = (i === st) ? "stage-pill active" : "stage-pill";
       }
       const descriptions = [
-        "STAGE 01 // 850nm NEAR-INFRARED OCULAR ACQUISITION",
-        "STAGE 02 // HOUGH CIRCLE TRANSFORM (PUPIL & IRIS BOUNDARY LOCK)",
-        "STAGE 03 // BITWISE ROI MASKING & DAUGMAN POLAR UNWRAPPING",
-        "STAGE 04 // 7-LAYER CNN FEATURE EXTRACTION (64×64×3 → 108 CLASSES)"
+        "STAGE 01 - 850nm NEAR-INFRARED OCULAR CAPTURE",
+        "STAGE 02 - HOUGH CIRCLE TRANSFORM (PUPIL & IRIS LOCK)",
+        "STAGE 03 - BITWISE ROI MASKING & DAUGMAN POLAR UNWRAP",
+        "STAGE 04 - 7-LAYER CNN FEATURE EXTRACTION (64×64×3 → 108)"
+      ];
+      const formulas = [
+        {
+          math: "I_blur(x,y) = MedianFilter_5x5(I_NIR(x,y))",
+          note: "Suppresses 850nm eyelash & corneal glare before Hough segmentation"
+        },
+        {
+          math: "(x - x_c)^2 + (y - y_c)^2 = r_iris^2  [param1=63, param2=70]",
+          note: "Locks concentric pupil (r=25px) and outer limbus iris ring (r=66px)"
+        },
+        {
+          math: "I_polar(r, θ) = I_cart(x_p(r,θ) + r·cosθ, y_p(r,θ) + r·sinθ)",
+          note: "Unwraps annular iris crypts into normalized dimensionless polar coordinates"
+        },
+        {
+          math: "y_hat = Softmax(W_dense · Flatten(Conv2D_32(Conv2D_32(ROI_64x64x3))))",
+          note: "Propagates 64×64×3 tensor across 1,643,788 parameters → 108 Subject IDs"
+        }
       ];
       document.getElementById("eye-stage-status").innerText = descriptions[st];
+      const mEl = document.getElementById("eye-stage-math");
+      const nEl = document.getElementById("eye-stage-note");
+      if (mEl && nEl) {
+        mEl.innerText = formulas[st].math;
+        nEl.innerText = formulas[st].note;
+      }
     }
 
     (function initGazeTrackingEyeScanner() {
@@ -1463,102 +1988,139 @@ a {
       const W = canvas.width, H = canvas.height;
 
       // Stationary Eye Socket Center
-      const eyeSocketX = W * 0.36;
+      const eyeSocketX = W * 0.35;
       const eyeSocketY = H * 0.52;
-      const eyeHalfW = 152;   // 304px total horizontal eyelid span
-      const eyeOpenH = 92;    // Generous vertical eyelid opening so full 66px-radius iris fits naturally!
+      const eyeHalfW = 152;
+      const baseEyeOpenH = 92;
       const irisR = 66;
 
-      // Smoothly interpolated gaze offset for the Iris & Pupil ONLY
+      // Smoothly interpolated gaze offset for the Iris & Pupil across the WHOLE WINDOW
       let targetGazeX = 0, targetGazeY = 0;
       let curGazeX = 0, curGazeY = 0;
+      let cursorProximity = 0; // 0 (far) to 1 (right over the eye center) for pupil light-reflex
       let tick = 0;
 
-      canvas.addEventListener("mousemove", (e) => {
+      // Occasional Autonomous Natural Blink State (Never triggered on click)
+      let blinkFactor = 1.0; // 1.0 = fully open, 0.04 = closed eyelid
+      let isBlinking = false;
+      let blinkPhase = 0;
+      let nextBlinkAt = performance.now() + 3800 + Math.random() * 2600;
+
+      // Track cursor across the ENTIRE browser window!
+      window.addEventListener("mousemove", (e) => {
         const rect = canvas.getBoundingClientRect();
-        const mx = (e.clientX - rect.left) * (W / rect.width);
-        const my = (e.clientY - rect.top) * (H / rect.height);
-        const dx = mx - eyeSocketX;
-        const dy = my - eyeSocketY;
+        if (rect.width === 0 || rect.height === 0) return;
+        const eyeScreenX = rect.left + (eyeSocketX / W) * rect.width;
+        const eyeScreenY = rect.top + (eyeSocketY / H) * rect.height;
+        const dx = e.clientX - eyeScreenX;
+        const dy = e.clientY - eyeScreenY;
         const dist = Math.hypot(dx, dy);
-        const maxDist = 160;
-        const clampFactor = Math.min(dist / maxDist, 1.0);
+        const maxWindowRadius = Math.max(window.innerWidth, window.innerHeight) * 0.65;
+        const clampFactor = Math.min(dist / Math.max(240, maxWindowRadius), 1.0);
         const angle = Math.atan2(dy, dx);
-        // Iris & pupil move inside the stationary eye socket
-        targetGazeX = Math.cos(angle) * clampFactor * 36;
-        targetGazeY = Math.sin(angle) * clampFactor * 18;
+
+        // Generous, smooth window-wide tracking inside the stationary eyelid contour
+        targetGazeX = Math.cos(angle) * Math.pow(clampFactor, 0.78) * 42;
+        targetGazeY = Math.sin(angle) * Math.pow(clampFactor, 0.78) * 21;
+
+        // Light reflex proximity (when cursor approaches eye, pupil constricts slightly)
+        cursorProximity = Math.max(0, 1 - Math.min(dist / 420, 1));
       });
 
-      canvas.addEventListener("mouseleave", () => {
-        targetGazeX = 0;
-        targetGazeY = 0;
+      window.addEventListener("mouseout", (e) => {
+        if (!e.relatedTarget && !e.toElement) {
+          targetGazeX = 0;
+          targetGazeY = 0;
+          cursorProximity = 0;
+        }
       });
 
-      function defineEyelidPath() {
+      function defineEyelidPath(openH) {
         ctx.beginPath();
         ctx.moveTo(eyeSocketX - eyeHalfW, eyeSocketY);
-        // Upper eyelid arch (cubic Bezier gives a wide, natural anatomical arch enclosing the whole iris)
         ctx.bezierCurveTo(
-          eyeSocketX - eyeHalfW * 0.55, eyeSocketY - eyeOpenH * 1.28,
-          eyeSocketX + eyeHalfW * 0.55, eyeSocketY - eyeOpenH * 1.28,
+          eyeSocketX - eyeHalfW * 0.55, eyeSocketY - openH * 1.28,
+          eyeSocketX + eyeHalfW * 0.55, eyeSocketY - openH * 1.28,
           eyeSocketX + eyeHalfW, eyeSocketY
         );
-        // Lower eyelid arch
         ctx.bezierCurveTo(
-          eyeSocketX + eyeHalfW * 0.55, eyeSocketY + eyeOpenH * 1.28,
-          eyeSocketX - eyeHalfW * 0.55, eyeSocketY + eyeOpenH * 1.28,
+          eyeSocketX + eyeHalfW * 0.55, eyeSocketY + openH * 1.28,
+          eyeSocketX - eyeHalfW * 0.55, eyeSocketY + openH * 1.28,
           eyeSocketX - eyeHalfW, eyeSocketY
         );
         ctx.closePath();
       }
 
-      function renderEye() {
+      function renderEye(now) {
         tick += 0.025;
-        // Smooth spring interpolation for pupil/iris movement
-        curGazeX += (targetGazeX - curGazeX) * 0.12;
-        curGazeY += (targetGazeY - curGazeY) * 0.12;
+        if (stageTransitionPulse > 0) {
+          stageTransitionPulse = Math.max(0, stageTransitionPulse - 0.03);
+        }
 
-        // Iris center and pupil center (pupil shifts slightly further for 3D anterior chamber depth!)
+        // Occasional autonomous natural blink every 4.2s - 7.0s
+        if (!isBlinking && now >= nextBlinkAt) {
+          isBlinking = true;
+          blinkPhase = 0;
+        }
+        if (isBlinking) {
+          blinkPhase += 0.15;
+          if (blinkPhase >= Math.PI) {
+            isBlinking = false;
+            blinkFactor = 1.0;
+            nextBlinkAt = now + 4200 + Math.random() * 3000;
+          } else {
+            // Smooth sine closure down to 0.05 height and back to 1.0
+            blinkFactor = Math.max(0.05, 1.0 - Math.sin(blinkPhase) * 0.95);
+          }
+        }
+
+        const currentOpenH = baseEyeOpenH * blinkFactor;
+
+        // Smooth spring interpolation for window-wide pupil/iris movement
+        curGazeX += (targetGazeX - curGazeX) * 0.14;
+        curGazeY += (targetGazeY - curGazeY) * 0.14;
+
         const irisX = eyeSocketX + curGazeX;
         const irisY = eyeSocketY + curGazeY;
         const pupilX = eyeSocketX + curGazeX * 1.16;
         const pupilY = eyeSocketY + curGazeY * 1.16;
-        const pupilR = 23 + Math.sin(tick * 1.5) * 2.5 - Math.hypot(curGazeX, curGazeY) * 0.08;
+        // Natural pupil hippus oscillation + light-reflex constriction on close cursor proximity
+        const pupilR = Math.max(16, 24.5 + Math.sin(tick * 1.5) * 2.1 - cursorProximity * 4.2 - stageTransitionPulse * 3.0);
 
         ctx.clearRect(0, 0, W, H);
 
-        // Subtle anatomical upper & lower eyelid crease lines (stationary)
+        // Subtle anatomical upper & lower eyelid crease lines
         ctx.beginPath();
         ctx.moveTo(eyeSocketX - eyeHalfW * 0.92, eyeSocketY - 10);
         ctx.bezierCurveTo(
-          eyeSocketX - eyeHalfW * 0.48, eyeSocketY - eyeOpenH * 1.48,
-          eyeSocketX + eyeHalfW * 0.48, eyeSocketY - eyeOpenH * 1.48,
+          eyeSocketX - eyeHalfW * 0.48, eyeSocketY - (baseEyeOpenH * 0.6 + currentOpenH * 0.4) * 1.48,
+          eyeSocketX + eyeHalfW * 0.48, eyeSocketY - (baseEyeOpenH * 0.6 + currentOpenH * 0.4) * 1.48,
           eyeSocketX + eyeHalfW * 0.92, eyeSocketY - 10
         );
         ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
         ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        // Fill Stationary Sclera (White of the Eye with subtle 3D shading)
-        defineEyelidPath();
+        // Fill Stationary Sclera
+        defineEyelidPath(currentOpenH);
         const scleraGrad = ctx.createRadialGradient(eyeSocketX, eyeSocketY, 30, eyeSocketX, eyeSocketY, eyeHalfW);
         if (currentEyeStage === 2) {
-          scleraGrad.addColorStop(0, "#090D14");
+          scleraGrad.addColorStop(0, "#111827");
           scleraGrad.addColorStop(1, "#05070B");
         } else {
-          scleraGrad.addColorStop(0, "#F8FAFC");
+          scleraGrad.addColorStop(0, "#FFFFFF");
           scleraGrad.addColorStop(0.75, "#E2E8F0");
           scleraGrad.addColorStop(1, "#94A3B8");
         }
         ctx.fillStyle = scleraGrad;
         ctx.fill();
 
-        // Clip everything inside the stationary eyelid contour so the iris stays cleanly inside the eye!
+        // Clip everything inside the current eyelid opening
         ctx.save();
-        defineEyelidPath();
+        defineEyelidPath(currentOpenH);
         ctx.clip();
 
-        // Draw Moving Iris Disc (Golden-Amber & Deep Emerald-Indigo Human Iris)
+        // Draw Moving Iris Disc
         const irisGrad = ctx.createRadialGradient(pupilX, pupilY, pupilR, irisX, irisY, irisR);
         irisGrad.addColorStop(0, "#78350F");
         irisGrad.addColorStop(0.35, "#D97706");
@@ -1570,7 +2132,7 @@ a {
         ctx.fillStyle = irisGrad;
         ctx.fill();
 
-        // Trabecular Iris Crypts & Radial Fibers following the moving Iris & Pupil
+        // Trabecular Iris Crypts & Radial Fibers
         for (let i = 0; i < 72; i++) {
           const a = (i / 72) * Math.PI * 2 + tick * 0.02;
           const wave = Math.sin(i * 5 + tick * 2) * 3;
@@ -1579,7 +2141,7 @@ a {
           ctx.beginPath();
           ctx.moveTo(pupilX + Math.cos(a) * r1, pupilY + Math.sin(a) * r1);
           ctx.lineTo(irisX + Math.cos(a) * r2, irisY + Math.sin(a) * r2);
-          ctx.strokeStyle = (i % 3 === 0) ? "rgba(251, 191, 36, 0.42)" : "rgba(45, 212, 191, 0.28)";
+          ctx.strokeStyle = (i % 3 === 0) ? "rgba(251, 191, 36, 0.44)" : "rgba(45, 212, 191, 0.30)";
           ctx.lineWidth = 1.1;
           ctx.stroke();
         }
@@ -1594,8 +2156,8 @@ a {
           if (i === 0) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
         }
-        ctx.strokeStyle = "rgba(253, 230, 138, 0.65)";
-        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = "rgba(253, 230, 138, 0.68)";
+        ctx.lineWidth = 1.25;
         ctx.stroke();
 
         // Moving Pupil Core
@@ -1604,36 +2166,49 @@ a {
         ctx.fillStyle = "#05070B";
         ctx.fill();
 
-        // Corneal Specular Reflection Highlight
+        // Corneal Specular Reflection Highlight (shifts dynamically with gaze)
         ctx.beginPath();
-        ctx.arc(pupilX - 9, pupilY - 9, 4.8, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+        ctx.arc(pupilX - 9 + curGazeX * 0.08, pupilY - 9 + curGazeY * 0.08, 4.8, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
         ctx.fill();
         ctx.beginPath();
         ctx.arc(pupilX + 7, pupilY + 6, 2.2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.48)";
         ctx.fill();
 
-        // Stage-Specific Hough Circle Overlays tracking the Iris & Pupil
+        // Stage-Specific Hough Circle Overlays & Polar Unwrap Rays
         if (currentEyeStage >= 1) {
           ctx.beginPath();
-          ctx.arc(irisX, irisY, irisR + 2, 0, Math.PI * 2);
+          ctx.arc(irisX, irisY, irisR + 2 + stageTransitionPulse * 6, 0, Math.PI * 2);
           ctx.strokeStyle = "#FBBF24";
           ctx.lineWidth = 2.2;
           ctx.setLineDash([6, 4]);
           ctx.stroke();
 
           ctx.beginPath();
-          ctx.arc(pupilX, pupilY, pupilR + 2, 0, Math.PI * 2);
+          ctx.arc(pupilX, pupilY, pupilR + 2 + stageTransitionPulse * 4, 0, Math.PI * 2);
           ctx.strokeStyle = "#2DD4BF";
           ctx.lineWidth = 2;
           ctx.stroke();
           ctx.setLineDash([]);
         }
 
+        if (currentEyeStage === 2) {
+          // Daugman Rubber-Sheet radial sampling rings
+          for (let rStep = 0.35; rStep <= 0.85; rStep += 0.25) {
+            ctx.beginPath();
+            ctx.arc(irisX, irisY, pupilR + (irisR - pupilR) * rStep, 0, Math.PI * 2);
+            ctx.strokeStyle = "rgba(45, 212, 191, 0.5)";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+            ctx.stroke();
+          }
+          ctx.setLineDash([]);
+        }
+
         if (currentEyeStage === 3) {
-          ctx.strokeStyle = "rgba(45, 212, 191, 0.45)";
-          ctx.lineWidth = 0.85;
+          ctx.strokeStyle = "rgba(45, 212, 191, 0.48)";
+          ctx.lineWidth = 0.9;
           for (let gx = irisX - irisR; gx <= irisX + irisR; gx += 14) {
             ctx.beginPath(); ctx.moveTo(gx, irisY - irisR); ctx.lineTo(gx, irisY + irisR); ctx.stroke();
           }
@@ -1644,8 +2219,8 @@ a {
 
         ctx.restore(); // End eyelid clip
 
-        // Draw crisp stationary Outer Eyelid Contour on top
-        defineEyelidPath();
+        // Draw crisp Outer Eyelid Contour on top
+        defineEyelidPath(currentOpenH);
         ctx.strokeStyle = "#FBBF24";
         ctx.lineWidth = 2.2;
         ctx.stroke();
@@ -1660,42 +2235,45 @@ a {
         ctx.stroke();
 
         // Right-Side HUD Telemetry & Polar Unwrap Preview
-        const hudX = W * 0.69;
+        const hudX = W * 0.68;
         ctx.fillStyle = "#FBBF24";
         ctx.font = "700 10px JetBrains Mono, monospace";
-        ctx.fillText("LIVE GAZE & HOUGH TELEMETRY", hudX, 38);
+        ctx.fillText("LIVE GAZE & HOUGH TELEMETRY", hudX, 34);
 
         ctx.fillStyle = "#D1D5DB";
         ctx.font = "500 9.5px JetBrains Mono, monospace";
-        ctx.fillText(`Pupil Gaze   : (${Math.round(curGazeX)}, ${Math.round(curGazeY)}) px`, hudX, 58);
-        ctx.fillText(`Pupil Radius : ${pupilR.toFixed(1)} px`, hudX, 74);
-        ctx.fillText(`Iris Radius  : ${irisR.toFixed(1)} px`, hudX, 90);
-        ctx.fillText(`ROI Tensor   : 64 × 64 × 3`, hudX, 106);
+        ctx.fillText(`Pupil Gaze   : (${Math.round(curGazeX)}, ${Math.round(curGazeY)}) px`, hudX, 54);
+        ctx.fillText(`Pupil Radius : ${pupilR.toFixed(1)} px`, hudX, 70);
+        ctx.fillText(`Iris Radius  : ${irisR.toFixed(1)} px`, hudX, 86);
+        ctx.fillText(`Eyelid State : ${isBlinking ? 'BLINK REFLEX' : 'OPEN (850nm)'}`, hudX, 102);
 
-        ctx.fillStyle = "#2DD4BF";
+        const polarHighlight = (currentEyeStage === 2);
+        ctx.fillStyle = polarHighlight ? "#FBBF24" : "#2DD4BF";
         ctx.font = "700 9.5px JetBrains Mono, monospace";
-        ctx.fillText("NORMALIZED POLAR STRIP (r, θ)", hudX, 138);
+        ctx.fillText("NORMALIZED POLAR STRIP (r, θ)", hudX, 134);
         ctx.fillStyle = "#161E2E";
-        ctx.fillRect(hudX, 146, 165, 42);
-        for (let sx = 0; sx < 165; sx += 4) {
-          const hBar = 18 + Math.sin(sx * 0.25 + tick * 3 + curGazeX * 0.1) * 14;
+        ctx.fillRect(hudX, 142, 172, 42);
+        for (let sx = 0; sx < 172; sx += 4) {
+          const hBar = 18 + Math.sin(sx * 0.25 + tick * 3 + curGazeX * 0.12) * 14;
           ctx.fillStyle = (sx % 8 === 0) ? "#FBBF24" : "#14B8A6";
-          ctx.fillRect(hudX + sx, 146 + (42 - hBar), 2.5, hBar);
+          ctx.fillRect(hudX + sx, 142 + (42 - hBar), 2.5, hBar);
         }
-        ctx.strokeStyle = "rgba(251, 191, 36, 0.5)";
-        ctx.strokeRect(hudX, 146, 165, 42);
+        ctx.strokeStyle = polarHighlight ? "#FBBF24" : "rgba(251, 191, 36, 0.45)";
+        ctx.lineWidth = polarHighlight ? 2 : 1;
+        ctx.strokeRect(hudX, 142, 172, 42);
 
-        ctx.fillStyle = "#FBBF24";
-        ctx.fillText("256-D CNN EMBEDDING CODE", hudX, 212);
-        for (let bx = 0; bx < 165; bx += 5) {
-          const bitOn = Math.sin(bx * 0.7 + tick + curGazeY * 0.1) > 0;
-          ctx.fillStyle = bitOn ? "#2DD4BF" : "rgba(255, 255, 255, 0.15)";
-          ctx.fillRect(hudX + bx, 220, 3.5, 22);
+        const cnnHighlight = (currentEyeStage === 3);
+        ctx.fillStyle = cnnHighlight ? "#2DD4BF" : "#FBBF24";
+        ctx.fillText("256-D CNN EMBEDDING CODE", hudX, 208);
+        for (let bx = 0; bx < 172; bx += 5) {
+          const bitOn = Math.sin(bx * 0.7 + tick + curGazeY * 0.12) > 0;
+          ctx.fillStyle = bitOn ? (cnnHighlight ? "#FBBF24" : "#2DD4BF") : "rgba(255, 255, 255, 0.15)";
+          ctx.fillRect(hudX + bx, 216, 3.5, 22);
         }
 
         requestAnimationFrame(renderEye);
       }
-      renderEye();
+      requestAnimationFrame(renderEye);
     })();
 
     // =========================================================================
@@ -1737,7 +2315,7 @@ a {
         });
         if (hoveredLayer >= 0) {
           const l = layers[hoveredLayer];
-          readout.innerText = `LAYER [${l.index}] ${l.name.toUpperCase()} — ${l.type} | Out: ${l.shape} | Params: ${l.params.toLocaleString()}`;
+          readout.innerText = `LAYER [${l.index}] ${l.name.toUpperCase()} - ${l.type} | Out: ${l.shape} | Params: ${l.params.toLocaleString()}`;
         } else {
           readout.innerText = "64×64×3 INPUT → 108 SOFTMAX IDENTITIES";
         }
@@ -1745,7 +2323,7 @@ a {
 
       canvas.addEventListener("click", () => {
         pulseWave = 0.01;
-        readout.innerText = "⚡ EXECUTING DEEP CNN FORWARD PASS ACROSS 1,643,788 PARAMETERS...";
+        readout.innerText = "EXECUTING DEEP CNN FORWARD PASS ACROSS 1,643,788 PARAMETERS...";
       });
 
       function renderCNN() {
@@ -1825,7 +2403,7 @@ a {
           <img class="sample-thumb" src="${s.image_uri}" alt="${s.title}" />
           <div>
             <div style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--ink-dark);">Subject #${String(s.person_id).padStart(3, '0')}</div>
-            <div style="font-size: 0.72rem; color: var(--slate-muted);">${s.title}</div>
+            <div style="font-size: 0.72rem; color: var(--slate-muted);">${s.title.replace(/\u2014/g, '-')}</div>
           </div>
         </div>
       `).join("");
@@ -1840,7 +2418,7 @@ a {
 
       const sample = preloadedSamples[idx];
       if (!sample) return;
-      drawScannerCanvases(sample.image_uri, sample.roi_uri, sample.person_id, sample.confidence, sample.hamming_dist, sample.title, false);
+      drawScannerCanvases(sample.image_uri, sample.roi_uri, sample.person_id, sample.confidence, sample.hamming_dist, sample.title.replace(/\u2014/g, '-'), false);
       if (showModal) {
         openLiveScanModal(idx, false);
       }
@@ -1854,7 +2432,7 @@ a {
       const personId = sample.person_id;
       const conf = sample.confidence;
       const hamming = sample.hamming_dist;
-      const titleStr = sample.title;
+      const titleStr = (sample.title || "").replace(/\u2014/g, '-');
 
       const mCanvas = document.getElementById("modal-scan-canvas");
       const mCtx = mCanvas.getContext("2d");
@@ -1887,7 +2465,6 @@ a {
           const cx = mCanvas.width / 2;
           const cy = mCanvas.height / 2;
 
-          // Laser sweep line
           if (progress < 100) {
             const scanY = (progress / 100) * mCanvas.height;
             mCtx.beginPath();
@@ -1899,12 +2476,11 @@ a {
           }
 
           if (progress < 35) {
-            stepTitle.innerText = "PHASE 1/3 // ACQUIRING NIR EYE & 5×5 MEDIAN FILTERING...";
+            stepTitle.innerText = "PHASE 1/3 - ACQUIRING NIR EYE & 5×5 MEDIAN FILTERING...";
             layerLog.innerText = "Applying cv2.medianBlur(img, 5) to suppress specular noise...";
           } else if (progress < 72) {
-            stepTitle.innerText = "PHASE 2/3 // LOCKING HOUGH CIRCLE BOUNDARIES (PUPIL & IRIS)...";
+            stepTitle.innerText = "PHASE 2/3 - LOCKING HOUGH CIRCLE BOUNDARIES (PUPIL & IRIS)...";
             layerLog.innerText = "cv2.HoughCircles(HOUGH_GRADIENT, param1=63, param2=70) locked ROI!";
-            // Draw pulsing Hough circles
             mCtx.beginPath();
             mCtx.arc(cx, cy, 80, 0, Math.PI * 2);
             mCtx.strokeStyle = "#FBBF24";
@@ -1919,7 +2495,6 @@ a {
             mCtx.stroke();
             mCtx.setLineDash([]);
 
-            // Populate circular ROI mini-canvas
             roiCtx.clearRect(0, 0, 76, 76);
             roiCtx.save();
             roiCtx.beginPath();
@@ -1928,7 +2503,7 @@ a {
             roiCtx.drawImage(img, cx - 85, cy - 85, 170, 170, 0, 0, 76, 76);
             roiCtx.restore();
           } else if (progress < 100) {
-            stepTitle.innerText = "PHASE 3/3 // PROPAGATING 64×64×3 TENSOR THROUGH 7-LAYER CNN...";
+            stepTitle.innerText = "PHASE 3/3 - PROPAGATING 64×64×3 TENSOR THROUGH 7-LAYER CNN...";
             layerLog.innerText = "conv2d_1 → max_pool_1 → conv2d_2 → flatten → dense(256) → softmax(108)";
             mCtx.beginPath();
             mCtx.arc(cx, cy, 80, 0, Math.PI * 2);
@@ -1939,7 +2514,6 @@ a {
             clearInterval(modalAnimTimer);
             modalAnimTimer = null;
 
-            // Final completed scan frame (Matches Figure 8.5 popup window from report!)
             mCtx.beginPath();
             mCtx.arc(cx, cy, 80, 0, Math.PI * 2);
             mCtx.strokeStyle = isSpoof ? "#E11D48" : "#FBBF24";
@@ -1957,19 +2531,19 @@ a {
             mCtx.fillStyle = isSpoof ? "#FDA4AF" : "#FBBF24";
             mCtx.font = "700 12.5px JetBrains Mono, monospace";
             mCtx.fillText(
-              isSpoof ? "▲ SPOOF ATTACK DETECTED — REJECTED" : `Person ID Predicted from Iris Recognition is : ${personId}`,
+              isSpoof ? "SPOOF ATTACK DETECTED - REJECTED" : `Person ID Predicted from Iris Recognition is : ${personId}`,
               18, 32
             );
 
             if (isSpoof) {
-              stepTitle.innerText = "▲ BIOMETRIC SECURITY ALERT — SPOOF ATTACK BLOCKED";
+              stepTitle.innerText = "BIOMETRIC SECURITY ALERT - SPOOF ATTACK BLOCKED";
               layerLog.innerText = "Counterfeit iris rejected: Absent 850nm specular reflection.";
               pidBox.innerText = "SPOOF BLOCKED";
               pidBox.style.color = "#F43F5E";
               pSubBox.innerText = "Synthetic / Printed Iris Pattern Rejected";
               metricsLine.innerText = "Confidence: 12.4% | HD: 0.489 (FAIL)";
             } else {
-              stepTitle.innerText = "✓ BIOMETRIC IDENTITY VERIFIED & LOCKED";
+              stepTitle.innerText = "BIOMETRIC IDENTITY VERIFIED & LOCKED";
               layerLog.innerText = "108-Class CNN Softmax Match Completed in 14.8 ms.";
               pidBox.innerText = `Person ID is : ${personId}`;
               pidBox.style.color = "#10B981";
@@ -2021,38 +2595,51 @@ a {
         ctxA.fillStyle = isSpoof ? "#FDA4AF" : "#FBBF24";
         ctxA.font = "700 12px JetBrains Mono, monospace";
         ctxA.fillText(
-          isSpoof ? "▲ SPOOF ATTACK DETECTED — REJECTED" : `Person ID Predicted from Iris is : ${personId}`,
+          isSpoof ? "SPOOF ATTACK DETECTED - REJECTED" : `Person ID Predicted from Iris is : ${personId}`,
           18, 30
         );
 
+        // Stage B: Circular Segmented ROI + Unwrapped Daugman Polar Strip at bottom
         ctxB.clearRect(0, 0, cB.width, cB.height);
         ctxB.fillStyle = "#090814";
         ctxB.fillRect(0, 0, cB.width, cB.height);
 
         ctxB.save();
         ctxB.beginPath();
-        ctxB.arc(cB.width / 2, cB.height / 2 - 15, 84, 0, Math.PI * 2);
+        ctxB.arc(cB.width / 2, cB.height / 2 - 34, 70, 0, Math.PI * 2);
         ctxB.clip();
-        ctxB.drawImage(img, cx - 95, cy - 95, 190, 190, cB.width / 2 - 84, cB.height / 2 - 99, 168, 168);
+        ctxB.drawImage(img, cx - 95, cy - 95, 190, 190, cB.width / 2 - 70, cB.height / 2 - 104, 140, 140);
         ctxB.restore();
 
         ctxB.beginPath();
-        ctxB.arc(cB.width / 2, cB.height / 2 - 15, 84, 0, Math.PI * 2);
+        ctxB.arc(cB.width / 2, cB.height / 2 - 34, 70, 0, Math.PI * 2);
         ctxB.strokeStyle = isSpoof ? "#E11D48" : "#14B8A6";
         ctxB.lineWidth = 2;
         ctxB.stroke();
 
+        // Draw Unwrapped Polar Strip (r, theta) bar at the bottom of Stage B
+        const stripX = 18, stripY = cB.height - 62, stripW = cB.width - 36, stripH = 34;
+        ctxB.fillStyle = "#141C2B";
+        ctxB.fillRect(stripX, stripY, stripW, stripH);
+        for (let col = 0; col < stripW; col += 4) {
+          const barH = 10 + ((Math.sin(col * 0.35 + personId) + 1) * 0.5) * 20;
+          ctxB.fillStyle = isSpoof ? "#E11D48" : (col % 8 === 0 ? "#FBBF24" : "#14B8A6");
+          ctxB.fillRect(stripX + col, stripY + (stripH - barH), 2.5, barH);
+        }
+        ctxB.strokeStyle = "rgba(255,255,255,0.18)";
+        ctxB.strokeRect(stripX, stripY, stripW, stripH);
+
         ctxB.fillStyle = "#E0E7FF";
-        ctxB.font = "600 10px JetBrains Mono, monospace";
+        ctxB.font = "600 9.5px JetBrains Mono, monospace";
         ctxB.textAlign = "center";
-        ctxB.fillText("EXTRACTED HOUGH IRIS ROI (64×64×3)", cB.width / 2, cB.height - 16);
+        ctxB.fillText("64×64×3 ROI + UNWRAPPED POLAR STRIP (r, θ)", cB.width / 2, cB.height - 10);
       };
       img.src = imgUri;
 
       const pill = document.getElementById("liveness-pill");
       if (isSpoof) {
         pill.className = "status-pill spoof";
-        pill.innerText = "▲ LIVENESS CHECK FAILED";
+        pill.innerText = "LIVENESS CHECK FAILED";
         document.getElementById("pred-person-title").innerText = "ACCESS DENIED (SPOOF)";
         document.getElementById("pred-person-sub").innerText = "Counterfeit / Printed Iris Pattern Rejected";
         document.getElementById("pred-conf").innerText = "12.40%";
@@ -2126,11 +2713,11 @@ a {
       const banner = document.getElementById("spoof-alert-banner");
       banner.style.display = "block";
       banner.innerHTML =
-        "<strong>▲ BIOMETRIC SECURITY ALERT — SYNTHETIC / PRINTED IRIS PRESENTATION ATTACK BLOCKED!</strong><br/>" +
-        "Absent 850nm corneal specular reflection &amp; high-frequency printer halftone artifacts detected. Hamming distance (0.489) exceeds security threshold (0.32).";
+        "<strong>BIOMETRIC SECURITY ALERT - SYNTHETIC / PRINTED IRIS PRESENTATION ATTACK BLOCKED!</strong><br/>" +
+        "Absent 850nm corneal specular reflection and high-frequency printer halftone artifacts detected. Hamming distance (0.489) exceeds security threshold (0.32).";
       document.getElementById("btn-reset-spoof").style.display = "inline-flex";
       const sample = preloadedSamples[currentSampleIdx];
-      drawScannerCanvases(sample.image_uri, sample.roi_uri, sample.person_id, sample.confidence, sample.hamming_dist, sample.title, true);
+      drawScannerCanvases(sample.image_uri, sample.roi_uri, sample.person_id, sample.confidence, sample.hamming_dist, sample.title.replace(/\u2014/g, '-'), true);
       openLiveScanModal(currentSampleIdx, true);
     }
 
@@ -2139,9 +2726,24 @@ a {
     }
 
     // =========================================================================
-    // 4. 60-EPOCH ACCURACY & LOSS CHART + FAR/FRR TUNER
+    // 4. ANIMATED 60-EPOCH ACCURACY & LOSS CHART + INTERACTIVE 7-LAYER INSPECTOR
     // =========================================================================
-    function drawTrainingCurveChart() {
+    let chartAnimFrame = null;
+
+    function animateTrainingCurveChart() {
+      if (chartAnimFrame) cancelAnimationFrame(chartAnimFrame);
+      let progress = 0;
+      function step() {
+        progress = Math.min(1, progress + 0.04);
+        drawTrainingCurveChart(progress, -1);
+        if (progress < 1) {
+          chartAnimFrame = requestAnimationFrame(step);
+        }
+      }
+      step();
+    }
+
+    function drawTrainingCurveChart(progress = 1, hoverEpoch = -1) {
       const canvas = document.getElementById("training-chart-canvas");
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
@@ -2165,31 +2767,78 @@ a {
         ctx.fillText(((i / 5) * maxVal).toFixed(1), padL - 10, y + 3);
       }
 
+      const maxIdx = Math.max(1, Math.floor((loss.length - 1) * progress));
+
       ctx.beginPath();
-      loss.forEach((v, idx) => {
+      for (let idx = 0; idx <= maxIdx; idx++) {
+        const v = loss[idx];
         const x = padL + (idx / (loss.length - 1)) * plotW;
         const y = padT + plotH - (v / maxVal) * plotH;
         if (idx === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      });
+      }
       ctx.strokeStyle = "#E11D48";
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
       ctx.beginPath();
-      acc.forEach((v, idx) => {
+      for (let idx = 0; idx <= maxIdx; idx++) {
+        const v = acc[idx];
         const x = padL + (idx / (acc.length - 1)) * plotW;
         const y = padT + plotH - (v / maxVal) * plotH;
         if (idx === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      });
+      }
       ctx.strokeStyle = "#0D9488";
       ctx.lineWidth = 2.8;
       ctx.stroke();
+
+      if (hoverEpoch >= 0 && hoverEpoch < acc.length) {
+        const hx = padL + (hoverEpoch / (acc.length - 1)) * plotW;
+        ctx.beginPath();
+        ctx.moveTo(hx, padT);
+        ctx.lineTo(hx, padT + plotH);
+        ctx.strokeStyle = "rgba(217, 119, 6, 0.65)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const ay = padT + plotH - (acc[hoverEpoch] / maxVal) * plotH;
+        const ly = padT + plotH - (loss[hoverEpoch] / maxVal) * plotH;
+        ctx.beginPath(); ctx.arc(hx, ay, 5, 0, Math.PI * 2); ctx.fillStyle = "#0D9488"; ctx.fill();
+        ctx.beginPath(); ctx.arc(hx, ly, 5, 0, Math.PI * 2); ctx.fillStyle = "#E11D48"; ctx.fill();
+      }
 
       ctx.fillStyle = "#141619";
       ctx.font = "700 11px JetBrains Mono, monospace";
       ctx.textAlign = "center";
       ctx.fillText("TRAINING EPOCH (0 → 60 EPOCHS ON 683 CASIA IRIS SCANS)", padL + plotW / 2, H - 10);
     }
+
+    (function initTrainingChartHover() {
+      const canvas = document.getElementById("training-chart-canvas");
+      if (!canvas) return;
+      canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const padL = 65, padR = 35;
+        const plotW = canvas.width - padL - padR;
+        const total = APP_DATA.history.accuracy.length;
+        const ratio = Math.max(0, Math.min(1, (mx - padL) / plotW));
+        const epIdx = Math.round(ratio * (total - 1));
+        const accPct = Math.min(100, (APP_DATA.history.accuracy[epIdx] * 100)).toFixed(1);
+        const lossVal = APP_DATA.history.loss[epIdx].toFixed(4);
+        const badge = document.getElementById("chart-epoch-readout");
+        if (badge) {
+          badge.innerText = `EPOCH ${epIdx + 1}: ACC ${accPct}% · LOSS ${lossVal}`;
+        }
+        drawTrainingCurveChart(1, epIdx);
+      });
+      canvas.addEventListener("mouseleave", () => {
+        const badge = document.getElementById("chart-epoch-readout");
+        if (badge) badge.innerText = "EPOCH 60: ACC 100.0% · LOSS 0.0119";
+        drawTrainingCurveChart(1, -1);
+      });
+    })();
 
     function updateThresholdMetrics(val) {
       const v = parseFloat(val);
@@ -2208,11 +2857,49 @@ a {
       }
     }
 
+    const LAYER_DETAILS = [
+      {
+        role: "2D Spatial Gabor-Like Feature Extractor",
+        desc: "Applies 32 learnable 3×3 spatial convolution kernels across the normalized 64×64×3 segmented iris ROI to capture primary trabecular crypt edges and collarette ring boundaries.",
+        math: "Parameter Math: (3 × 3 × 3 + 1) × 32 filters = 896 trainable weights"
+      },
+      {
+        role: "Spatial Downsampling & Translation Invariance",
+        desc: "Performs 2×2 maximum pooling across all 32 feature maps, reducing spatial resolution from 62×62 to 31×31 while preserving high-response iris furrow activations.",
+        math: "Parameter Math: 0 trainable weights (non-parametric spatial pooling)"
+      },
+      {
+        role: "Deep Radial Furrow & Collarette Texture Conv2D",
+        desc: "Second 32-filter 3×3 convolution block combining low-level edge primitives into higher-order radial iris textures across 32 input channels.",
+        math: "Parameter Math: (3 × 3 × 32 + 1) × 32 filters = 9,248 trainable weights"
+      },
+      {
+        role: "Second-Stage 2×2 Spatial Compression",
+        desc: "Compresses the 29×29×32 activation volume down to a compact 14×14×32 representation invariant to minor pupil dilation shifts.",
+        math: "Parameter Math: 0 trainable weights (2×2 stride downsampling)"
+      },
+      {
+        role: "1D Biometric Feature Vectorization",
+        desc: "Unrolls the 3D spatial tensor (14 × 14 × 32) into a single 6,272-dimensional feature vector feeding the dense classification head.",
+        math: "Tensor Flattening: 14 × 14 × 32 = 6,272 scalar features"
+      },
+      {
+        role: "256-Dimensional Biometric Embedding Bottleneck",
+        desc: "Projects the 6,272 spatial features into a dense 256-unit ReLU biometric signature vector that separates all 108 enrolled subjects in embedding space.",
+        math: "Parameter Math: (6,272 × 256) + 256 biases = 1,605,888 trainable weights"
+      },
+      {
+        role: "108-Subject Softmax Identity Classifier",
+        desc: "Computes normalized class probabilities across all 108 CASIA-IrisV1 subjects, selecting argmax(P) + 1 as the verified Person ID.",
+        math: "Parameter Math: (256 × 108) + 108 biases = 27,756 trainable weights"
+      }
+    ];
+
     function renderLayersTable() {
       const tbody = document.getElementById("cnn-layers-tbody");
       if (!tbody) return;
-      tbody.innerHTML = APP_DATA.architecture.layers.map(l => `
-        <tr>
+      tbody.innerHTML = APP_DATA.architecture.layers.map((l, idx) => `
+        <tr class="layer-row ${idx === selectedLayerIdx ? 'active-layer-row' : ''}" onclick="selectCNNLayerInspector(${idx})">
           <td class="mono-cell">#0${l.index}</td>
           <td class="mono-cell"><strong>${l.name}</strong></td>
           <td class="mono-cell">${l.type}</td>
@@ -2223,14 +2910,75 @@ a {
       `).join("");
     }
 
+    function selectCNNLayerInspector(idx) {
+      selectedLayerIdx = idx;
+      renderLayersTable();
+      const l = APP_DATA.architecture.layers[idx];
+      const info = LAYER_DETAILS[idx] || LAYER_DETAILS[0];
+      document.getElementById("insp-layer-kicker").innerText = `SELECTED LAYER TELEMETRY · LAYER #0${l.index} (${l.type.toUpperCase()})`;
+      document.getElementById("insp-layer-title").innerText = `${l.name} · ${info.role}`;
+      document.getElementById("insp-layer-desc").innerText = info.desc;
+      document.getElementById("insp-layer-math").innerText = `${info.math} · Output Tensor: ${l.shape}`;
+
+      const c = document.getElementById("layer-activation-canvas");
+      if (!c) return;
+      const ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, c.width, c.height);
+      const count = 8;
+      const boxW = 22, boxH = 52, gap = 5, startX = 10, startY = 16;
+      for (let i = 0; i < count; i++) {
+        const x = startX + i * (boxW + gap);
+        ctx.fillStyle = "#161E2E";
+        ctx.fillRect(x, startY, boxW, boxH);
+        for (let py = 0; py < boxH; py += 4) {
+          for (let px = 0; px < boxW; px += 4) {
+            const v = Math.sin((px + idx * 7) * 0.35 + (py + i * 5) * 0.35);
+            ctx.fillStyle = v > 0.15 ? "#14B8A6" : (v > -0.25 ? "#D97706" : "#0F172A");
+            ctx.fillRect(x + px, startY + py, 3, 3);
+          }
+        }
+        ctx.strokeStyle = "rgba(251, 191, 36, 0.45)";
+        ctx.strokeRect(x, startY, boxW, boxH);
+      }
+    }
+
+    // =========================================================================
+    // 5. WORD-BY-WORD SCROLL REVEAL FOR OVERVIEW STAGE CODE SNIPPETS
+    // =========================================================================
+    function initScrollWordByWordCodeReveal() {
+      const blocks = document.querySelectorAll(".scroll-code-snippet");
+      blocks.forEach((block) => {
+        const rawText = block.textContent.trim();
+        const tokens = rawText.split(/\s+/);
+        block.innerHTML = tokens.map((t, idx) =>
+          `<span class="code-word-token" style="transition-delay: ${idx * 26}ms">${t}</span>`
+        ).join(" ");
+      });
+
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+            }
+          });
+        }, { threshold: 0.18 });
+        blocks.forEach(b => obs.observe(b));
+      } else {
+        blocks.forEach(b => b.classList.add("revealed"));
+      }
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       renderNavigation();
       renderSampleCards();
       renderLayersTable();
+      selectCNNLayerInspector(0);
+      initScrollWordByWordCodeReveal();
       if (preloadedSamples.length > 0) {
         selectPreloadedSample(0, false);
       }
-      drawTrainingCurveChart();
+      drawTrainingCurveChart(1, -1);
     });
   </script>
 </body>

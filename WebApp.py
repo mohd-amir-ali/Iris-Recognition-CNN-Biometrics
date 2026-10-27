@@ -79,7 +79,7 @@ class IrisWebHandler(BaseHTTPRequestHandler):
 
 def run_web_server(host: str = "127.0.0.1", port: int = 5055):
     print("=" * 74)
-    print("  IRIS-CNN // BIOMETRIC IRIS RECOGNITION BY CONVOLUTIONAL NEURAL NETWORK")
+    print("  IRIS RECOGNITION - CNN · BIOMETRIC IRIS RECOGNITION BY CONVOLUTIONAL NEURAL NETWORK")
     print("=" * 74)
     print(f"  [Dataset]      CASIA-IrisV1 (108 Enrolled Subjects | 683 NIR Eye Scans)")
     print(f"  [CNN Model]    7-Layer Sequential CNN (1,643,788 Trainable Parameters)")

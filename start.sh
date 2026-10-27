@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# IRIS-CNN // Biometric Iris Recognition by Convolutional Neural Network
+# IRIS RECOGNITION - CNN · Biometric Iris Recognition by Convolutional Neural Network
 # One-Command macOS / Linux Launcher (Port 5055)
 # ==============================================================================
 
@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR" || exit 1
 
 echo "========================================================================"
-echo "  IRIS-CNN // Biometric Iris Recognition by Convolutional Neural Network"
+echo "  IRIS RECOGNITION - CNN · Biometric Iris Recognition by Convolutional Neural Network"
 echo "========================================================================"
 
 if [ "$1" == "--desktop" ]; then

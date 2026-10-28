@@ -2,6 +2,11 @@
 model/X.txt.npy
 SCREENS.docx
 
+# Local private developer handbook & helper scripts (kept locally, not uploaded to GitHub)
+Project_Tutorial_Guide.html
+PROJECT_GUIDE_AND_TUTORIAL.md
+Push_To_GitHub.command
+
 # Python cache & virtual environments
 __pycache__/
 *.py[cod]

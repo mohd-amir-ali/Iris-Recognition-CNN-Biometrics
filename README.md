@@ -2,7 +2,6 @@
 
 [![Launch Live Demo](https://img.shields.io/badge/Launch%20Demo-Live%20Interactive%20Platform-D97706?style=for-the-badge&labelColor=0E131B)](https://mohd-amir-ali.github.io/Iris-Recognition-CNN-Biometrics/)
 [![Launch Standalone App](https://img.shields.io/badge/Launch%20App-Zero--Install%20HTML5%20%2B%20Python%20API-0D9488?style=for-the-badge&labelColor=0E131B)](https://mohd-amir-ali.github.io/Iris-Recognition-CNN-Biometrics/Launch_Iris_Dashboard.html)
-[![Developer Guide](https://img.shields.io/badge/Developer%20Guide-Interactive%20Handbook-D97706?style=for-the-badge&labelColor=0E131B)](https://mohd-amir-ali.github.io/Iris-Recognition-CNN-Biometrics/Project_Tutorial_Guide.html)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Run%20Python%20Backend-161D2A?style=for-the-badge&logo=github)](https://codespaces.new/mohd-amir-ali/Iris-Recognition-CNN-Biometrics)
 [![Author](https://img.shields.io/badge/Author-Mohd%20Amir%20Ali-D97706?style=for-the-badge&labelColor=0E131B)](https://techwithamir.com)
 
@@ -13,7 +12,6 @@
 > **Live Interactive Links:**
 > - **[Launch Live Interactive Demo (GitHub Pages) ↗](https://mohd-amir-ali.github.io/Iris-Recognition-CNN-Biometrics/)** - Explore the full-window Gaze-Tracking Iris & Hough Laser Scanner, 7-Layer CNN Topology Visualizer, Role-Gated Biometric Scanner, and 60-Epoch Analytics.
 > - **[Launch Standalone HTML5 Dashboard (`Launch_Iris_Dashboard.html`) ↗](https://mohd-amir-ali.github.io/Iris-Recognition-CNN-Biometrics/Launch_Iris_Dashboard.html)** - Zero-install browser build.
-> - **[Read Interactive Developer Handbook (`Project_Tutorial_Guide.html`) ↗](https://mohd-amir-ali.github.io/Iris-Recognition-CNN-Biometrics/Project_Tutorial_Guide.html)** - Complete pipeline architecture and file reference.
 
 ---
 
@@ -53,8 +51,6 @@ Unlike unimodal biometrics that degrade under lighting or age variations, the hu
 .
 ├── index.html                        # Live GitHub Pages Interactive Web App
 ├── Launch_Iris_Dashboard.html        # Standalone Local Browser Dashboard (No Terminal Needed)
-├── Project_Tutorial_Guide.html       # Interactive Workflow & Developer Handbook
-├── PROJECT_GUIDE_AND_TUTORIAL.md     # Markdown Developer Tutorial & Customization Guide
 ├── Run_Iris_Project.command          # One-Click macOS Finder Web Server Launcher (Port 5055)
 ├── run.bat                           # One-Click Windows Launcher
 ├── start.sh                          # CLI Launcher (Web Server or --desktop Tkinter GUI)
